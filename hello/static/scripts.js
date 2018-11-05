@@ -108,8 +108,9 @@ function toggleTorch() {
     // get the active track of the stream
     const track = stream.getVideoTracks()[0];
     const capabilities = track.getCapabilities();
-
+    alert(capabilities)
     if (capabilities.torch) {
+      alert(capabilities.torch)
       track.applyConstraints({
         advanced: [{ torch: true }]
       })
