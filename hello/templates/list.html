@@ -3,6 +3,7 @@
 {% block content %}
   <div id="scanner-container"></div>
   <input type="button" id="btn" value="Start/Stop the scanner" />
+  <input type="button" id="torch" value="Toggle Torch" />
   <form action="/new/" method="POST">
     {% csrf_token %}
     <input class="textfield" type="text" name="partno">

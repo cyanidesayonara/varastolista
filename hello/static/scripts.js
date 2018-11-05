@@ -1,58 +1,12 @@
 var _scannerIsRunning = false;
-
-//Test browser support
-const SUPPORTS_MEDIA_DEVICES = 'mediaDevices' in navigator;
-
-if (SUPPORTS_MEDIA_DEVICES) {
-  //Get the environment camera (usually the second one)
-  navigator.mediaDevices.enumerateDevices().then(devices => {
-
-    const cameras = devices.filter((device) => device.kind === 'videoinput');
-
-    if (cameras.length === 0) {
-      throw 'No camera found on this device.';
-    }
-    const camera = cameras[cameras.length - 1];
-    console.log(camera)
-
-    // Create stream and get video track
-    navigator.mediaDevices.getUserMedia({
-      video: {
-        deviceId: camera.deviceId,
-        facingMode: ['user', 'environment'],
-        height: { ideal: 1080 },
-        width: { ideal: 1920 }
-      }
-    }).then(stream => {
-      const track = stream.getVideoTracks()[0];
-
-      //Create image capture object and get camera capabilities
-      const imageCapture = new ImageCapture(track)
-      const photoCapabilities = imageCapture.getPhotoCapabilities().then(() => {
-
-        //todo: check if camera has a torch
-
-        //let there be light!
-        const btn = document.querySelector('.switch');
-        btn.addEventListener('click', function () {
-          track.applyConstraints({
-            advanced: [{ torch: true }]
-          });
-        });
-      });
-    });
-  });
-
-  //The light will be on as long the track exists
-
-}
+var _torchIsLit = false;
 
 function openModal() {
   $(".modal").fadeIn();
-}
+};
 function closeModal() {
   $(".modal").fadeOut();
-}
+};
 function pushState(url) {
   var main = $(".main");
   var context = main[0].innerHTML;
@@ -61,7 +15,7 @@ function pushState(url) {
     "url": url,
   };
   history.pushState(state, "", "");
-}
+};
 function replaceState(url) {
   var main = $(".main");
   var context = main[0].innerHTML;
@@ -70,8 +24,7 @@ function replaceState(url) {
     "url": url,
   };
   history.replaceState(state, "", "");
-}
-
+};
 function startQuagga() {
   Quagga.init({
     inputStream: {
@@ -141,26 +94,61 @@ function startQuagga() {
     }
   });
 
-
   Quagga.onDetected(function (result) {
     $(".textfield").val(result.codeResult.code);
     Quagga.stop();
     $('#scanner-container').empty();
   });
+};
+function toggleTorch() {
+  navigator.mediaDevices.getUserMedia({
+    video: {
+      facingMode: 'environment',
+    }
+  })
+    .then((stream) => {
+      const video = document.querySelector('video');
+      video.srcObject = stream;
+
+      // get the active track of the stream
+      const track = stream.getVideoTracks()[0];
+
+      video.addEventListener('loadedmetadata', (e) => {
+        window.setTimeout(() => (
+          onCapabilitiesReady(track.getCapabilities())
+        ), 500);
+      });
+
+      function onCapabilitiesReady(capabilities) {
+        if (capabilities.torch) {
+          _torchIsLit = _torchIsLit ? false : true;
+          track.applyConstraints({
+            advanced: [{ torch: _torchIsLit }]
+          })
+            .catch(e => console.log(e));
+        }
+      }
+
+    })
+    .catch(err => console.error('getUserMedia() failed: ', err));
 }
 
 $(document)
   .ready(function() {
     replaceState(window.location.href);
+  })
+  .on("click", "#btn", function() {
     // Start/stop scanner
-    document.getElementById("btn").addEventListener("click", function () {
-      if (_scannerIsRunning) {
-        Quagga.stop();
-        _scannerIsRunning = false
-      } else {
-        startQuagga();
-      }
-    }, false);
+    if (_scannerIsRunning) {
+      Quagga.stop();
+      $('#scanner-container').empty();
+      _scannerIsRunning = false;
+    } else {
+      startQuagga();
+    }
+  })
+  .on("click", "#torch", function () {
+    toggleTorch();
   })
   .on("click", ".ajax", function(e) {
     e.preventDefault();

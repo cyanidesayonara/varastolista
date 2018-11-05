@@ -65,7 +65,7 @@ nav button:nth-child(2  ) {
   position: relative;
 }
 #scanner-container>* {
-  width: 50%;
+  max-width: 100%;
 }
 canvas.drawing, canvas.drawingBuffer {
     position: absolute;
