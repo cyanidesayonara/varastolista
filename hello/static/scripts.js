@@ -121,9 +121,8 @@ function toggleTorch() {
 
       function onCapabilitiesReady(capabilities) {
         if (capabilities.torch) {
-          _torchIsLit = _torchIsLit ? false : true;
           track.applyConstraints({
-            advanced: [{ torch: _torchIsLit }]
+            advanced: [{ torch: true }]
           })
             .catch(e => console.log(e));
         }
