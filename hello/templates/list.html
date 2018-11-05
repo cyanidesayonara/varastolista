@@ -1,0 +1,105 @@
+{% extends request.is_ajax|yesno:"ajax.html,base.html" %}
+
+{% block content %}
+  <form action="/new/" method="POST">
+    {% csrf_token %}
+    <input type="text" name="partno">
+    <button type="submit">
+      Uusi
+    </button>
+  </form>
+  <form action="/plus/" method="POST">
+    {% csrf_token %}
+    <input type="text" name="partno">
+    <button type="submit">
+      Lisää
+    </button>
+  </form>
+  <form action="/minus/" method="POST">
+    {% csrf_token %}
+    <input type="text" name="partno">
+    <button type="submit">
+      Vähennä
+    </button>
+  </form>
+  <form action="/edit/" method="POST">
+    {% csrf_token %}
+    <input type="text" name="partno">
+    <button type="submit">
+      Muokkaa
+    </button>
+  </form>
+  <form action="/delete/" method="POST">
+    {% csrf_token %}
+    <input type="text" name="partno">
+    <button type="submit">
+      Poista
+    </button>
+  </form>
+  <table>
+    <thead>
+      <tr>
+        <th>partno</th>
+        <th>updated</th>
+        <th>total</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for part in parts %}
+        <tr>
+          <td>
+            <span>
+              {{ part.partno }}
+            </span>
+          </td>
+          <td>
+            <span>
+              {{ part.updated_at }}
+            </span>
+          </td>
+          <td>
+            <span>
+              {{ part.total }}
+            </span>
+          </td>
+          <td>
+            <form action="/plus/" method="POST">
+              {% csrf_token %}
+              <input type="hidden" name="partno" value="{{ part.partno }}">
+              <button type="submit">
+                <i class="fas fa-plus"></i>
+              </button>
+            </form>
+          </td>
+          <td>
+            <form action="/minus/" method="POST">
+              {% csrf_token %}
+              <input type="hidden" name="partno" value="{{ part.partno }}">
+              <button type="submit">
+                <i class="fas fa-minus"></i>
+              </button>
+            </form>
+          </td>
+          <td>
+            <form action="/edit/" method="POST">
+              {% csrf_token %}
+              <input type="hidden" name="partno" value="{{ part.partno }}">
+              <button type="submit">
+                <i class="fas fa-edit"></i>
+              </button>
+            </form>
+          </td>
+          <td>
+            <form action="/delete/" method="POST">
+              {% csrf_token %}
+              <input type="hidden" name="partno" value="{{ part.partno }}">
+              <button type="submit">
+                <i class="fas fa-trash-alt"></i>
+              </button>
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

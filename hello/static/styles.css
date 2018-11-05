@@ -5,11 +5,10 @@ html {
   box-sizing: inherit;
 }
 body {
-  box-shadow: rgba(150, 150, 150) 0 0 10px;
   position: relative;
-  height: 100vh;  
+  min-height: 100vh;  
   margin: auto;
-  max-width: 476px;
+  max-width: 800px;
 }
 a {
   color: black;
@@ -23,7 +22,7 @@ button {
 }
 nav {
   box-shadow: rgba(150, 150, 150) 0 0 10px;
-  background: #08AE9E;
+  background: #123456;
   text-align: center;
 }
 nav h1 {
