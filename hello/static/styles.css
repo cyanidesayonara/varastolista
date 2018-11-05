@@ -57,3 +57,15 @@ nav button:nth-child(2  ) {
   background: rgba(0, 0, 0, .5);
   padding: 40px;
 }
+
+#scanner-container {
+  position: relative;
+}
+#scanner-container>* {
+  width: 50%;
+}
+canvas.drawing, canvas.drawingBuffer {
+    position: absolute;
+    left: 0;
+    top: 0;
+}

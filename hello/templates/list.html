@@ -1,37 +1,39 @@
 {% extends request.is_ajax|yesno:"ajax.html,base.html" %}
 
 {% block content %}
+  <div id="scanner-container"></div>
+  <input type="button" id="btn" value="Start/Stop the scanner" />
   <form action="/new/" method="POST">
     {% csrf_token %}
-    <input type="text" name="partno">
+    <input class="textfield" type="text" name="partno">
     <button type="submit">
       Uusi
     </button>
   </form>
   <form action="/plus/" method="POST">
     {% csrf_token %}
-    <input type="text" name="partno">
+    <input class="textfield" type="text" name="partno">
     <button type="submit">
       Lisää
     </button>
   </form>
   <form action="/minus/" method="POST">
     {% csrf_token %}
-    <input type="text" name="partno">
+    <input class="textfield" type="text" name="partno">
     <button type="submit">
       Vähennä
     </button>
   </form>
   <form action="/edit/" method="POST">
     {% csrf_token %}
-    <input type="text" name="partno">
+    <input class="textfield" type="text" name="partno">
     <button type="submit">
       Muokkaa
     </button>
   </form>
   <form action="/delete/" method="POST">
     {% csrf_token %}
-    <input type="text" name="partno">
+    <input class="textfield" type="text" name="partno">
     <button type="submit">
       Poista
     </button>
