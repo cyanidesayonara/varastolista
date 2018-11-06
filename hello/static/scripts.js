@@ -98,6 +98,7 @@ function startQuagga() {
     $(".textfield").val(result.codeResult.code);
     Quagga.stop();
     $('#scanner-container').empty();
+    _scannerIsRunning = false;
   });
 };
 function toggleTorch() {
