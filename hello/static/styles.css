@@ -19,25 +19,19 @@ p {
 }
 button {
   cursor: pointer;
+  margin: 2px;
 }
 nav {
   box-shadow: rgba(150, 150, 150) 0 0 10px;
-  background: rgba(18, 52, 86, .8);
+  background: rgb(18, 52, 86);
   text-align: center;
+  margin: 0 -10px;
 }
 nav h1 {
   display: inline-block;
-  font-size: 1.8em;
-  font-weight: 600;
-  margin: 10px 0;
+  font-size: 1.5em;
   color: #fff;
   cursor: pointer;
-}
-nav button:nth-child(1) {
-  float: left;
-}
-nav button:nth-child(2  ) {
-  float: right;
 }
 .content::before {
   position: absolute;
@@ -60,7 +54,19 @@ nav button:nth-child(2  ) {
   background: rgba(0, 0, 0, .5);
   padding: 40px;
 }
-
+table {
+  table-layout:fixed;
+  border-collapse: collapse;
+  width: 100%;
+}
+table tr {
+  border-bottom: 1px solid black;
+}
+th, td {
+  word-wrap:break-word;
+  padding: 5px;
+  text-align: left;
+}
 #scanner-container {
   position: relative;
 }

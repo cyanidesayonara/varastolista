@@ -2,8 +2,9 @@
 
 {% block content %}
 <div>
-  <p>
-    Tervetuloa fyhrin nettisivulle
-  </p>
+  <form action="/" method="POST">
+    <input type="text" name="username" required>
+    <input type="password" name="password" required>
+  </form>
 </div>
 {% endblock %}

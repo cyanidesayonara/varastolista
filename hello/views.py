@@ -20,12 +20,13 @@ def index(request):
 def new(request):
     if request.method == 'POST':
         partno = request.POST.get('partno')
-        part, created = Part.objects.get_or_create(partno=partno)
-        if created:
-            if request.POST.get('plus'):
-                part.update()
-                part.total = 1
-                part.save()
+        if partno:
+            part, created = Part.objects.get_or_create(partno=partno)
+            if created:
+                if request.POST.get('plus'):
+                    part.update()
+                    part.total = 1
+                    part.save()
         return redirect('/')
 
 @login_required
@@ -33,11 +34,12 @@ def new(request):
 def plus(request):
     if request.method == 'POST':
         partno = request.POST.get('partno')
-        part = Part.objects.get(partno=partno)
-        if part:
-            part.plus()
-            part.update()
-            part.save()
+        if partno:
+            part = Part.objects.get(partno=partno)
+            if part:
+                part.plus()
+                part.update()
+                part.save()
         return redirect('/')
 
 @login_required
@@ -45,11 +47,12 @@ def plus(request):
 def minus(request):
     if request.method == 'POST':
         partno = request.POST.get('partno')
-        part = Part.objects.get(partno=partno)
-        if part:
-            part.minus()
-            part.update()
-            part.save()
+        if partno:
+            part = Part.objects.get(partno=partno)
+            if part:
+                part.minus()
+                part.update()
+                part.save()
         return redirect('/')
 
 @login_required
@@ -57,11 +60,11 @@ def minus(request):
 def edit(request):
     if request.method == 'POST':
         partno = request.POST.get('partno')
-        part = Part.objects.get(partno=partno)
-        print(part)
-        if part:
-            part.update()
-            part.save()
+        if partno:
+            part = Part.objects.get(partno=partno)
+            if part:
+                part.update()
+                part.save()
         return redirect('/')
 
 @login_required
@@ -69,7 +72,8 @@ def edit(request):
 def delete(request):
     if request.method == 'POST':
         partno = request.POST.get('partno')
-        part = Part.objects.get(partno=partno)
-        if part:
-            part.delete()
+        if partno:
+            part = Part.objects.get(partno=partno)
+            if part:
+                part.delete()
         return redirect('/')

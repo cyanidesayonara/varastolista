@@ -57,17 +57,16 @@ function startQuagga() {
       }
     },
 
-  }, function (err) {
+  }, function(err) {
     if (err) {
       console.log(err);
       return
     }
 
     console.log("Initialization finished. Ready to start");
-    Quagga.start();
-
     // Set flag to is running
     _scannerIsRunning = true;
+    Quagga.start();
   });
 
   Quagga.onProcessed(function (result) {
@@ -124,10 +123,10 @@ $(document)
     replaceState(window.location.href);
   })
   .on("click", "#btn", function() {
+    $('#scanner-container').empty();
     // Start/stop scanner
     if (_scannerIsRunning) {
       Quagga.stop();
-      $('#scanner-container').empty();
       _scannerIsRunning = false;
     } else {
       startQuagga();
