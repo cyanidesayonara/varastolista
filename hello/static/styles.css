@@ -33,36 +33,43 @@ nav h1 {
   color: #fff;
   cursor: pointer;
 }
-.content::before {
+#content::before {
+  background: rgba(150, 150, 150, .2);
   position: absolute;
-  background: rgba(150, 150, 150, .5);
   content: "";
   height: 100%;
   width: 100%;
   z-index: -1;
   opacity: .5;
 }
-.content > * {
+#content > * {
   padding: 20px;
 }
-.modal {
+#modal {
   display: none;
+  text-align: center;
   width: 100%;
   height: 100%;
   top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   position: absolute;
   background: rgba(0, 0, 0, .5);
   padding: 40px;
 }
+#scanner-container > * {
+  width: 50%;
+}
 table {
   table-layout:fixed;
   border-collapse: collapse;
-  width: 100%;
 }
-table tr {
+tr {
   border-bottom: 1px solid black;
 }
-th, td {
+th,
+td {
   word-wrap:break-word;
   padding: 5px;
   text-align: left;
@@ -77,4 +84,23 @@ canvas.drawing, canvas.drawingBuffer {
     position: absolute;
     left: 0;
     top: 0;
+}
+
+@media screen and (max-width: 767px) {
+  table {
+    height: 1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 100%;
+    bottom: 100%;
+  }
+  tr {
+    display: block;
+  }
+  TH,
+  TD {
+    display: block;
+    text-align: right;
+  }
 }

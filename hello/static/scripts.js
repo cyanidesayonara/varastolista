@@ -2,10 +2,13 @@ var _scannerIsRunning = false;
 var _torchIsLit = false;
 
 function openModal() {
-  $(".modal").fadeIn();
+  $("#modal").fadeIn();
 };
 function closeModal() {
-  $(".modal").fadeOut();
+  $("#modal").fadeOut();
+};
+function toggleModal() {
+  $("#modal").toggle();
 };
 function pushState(url) {
   var main = $(".main");
@@ -122,7 +125,7 @@ $(document)
   .ready(function() {
     replaceState(window.location.href);
   })
-  .on("click", "#btn", function() {
+  .on("click", ".scanner", function() {
     $('#scanner-container').empty();
     // Start/stop scanner
     if (_scannerIsRunning) {
@@ -132,11 +135,21 @@ $(document)
       startQuagga();
     }
   })
+  .on("click", ".torch", function () {
+    toggleTorch();
+  })
+  .on("click", "#modal", function(e) {
+    console.log(e.target)
+    if (e.target != this) {
+      return false;
+    }
+    closeModal();
+  })
   .on("click", ".ajax", function(e) {
     e.preventDefault();
     var url = $(this).data("url");
     var dump = $(this).data("dump");
-    if (dump == ".modal") {
+    if (dump == "#modal") {
       openModal();
     }
     pushState(url);

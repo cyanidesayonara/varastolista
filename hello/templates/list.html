@@ -2,45 +2,45 @@
 
 {% block content %}
   <div id="scanner-container"></div>
-  <input type="button" id="btn" value="Start/Stop Scanner">
-  <input type="button" id="torch" value="Toggle Torch">
-  <form action="/new/" method="POST">
+  <button type="button" class="scanner">
+    Start/Stop Scanner
+  </button>
+  <br>
+  <button type="button" class="torch">
+    Toggle Torch
+  </button>
+  <br>
+  <br>
+  <form method="POST">
     {% csrf_token %}
+    <label>
+      Partno
+    </label>
+    <br>
     <input class="textfield" type="text" name="partno">
-    <button type="submit">
+    <br>
+    <br>
+    <button formaction="/new/" type="submit">
       New
     </button>
     <input type="checkbox" name="plus">
-    Add +1
-  </form>
-  <form action="/plus/" method="POST">
-    {% csrf_token %}
-    <input class="textfield" type="text" name="partno">
-    <button type="submit">
+      Add +1
+    <br>
+    <button formaction="/plus/" type="submit">
       Add
     </button>
-  </form>
-  <form action="/minus/" method="POST">
-    {% csrf_token %}
-    <input class="textfield" type="text" name="partno">
-    <button type="submit">
+    <button formaction="/minus/" type="submit">
       Subtract
     </button>
-  </form>
-  <form action="/edit/" method="POST">
-    {% csrf_token %}
-    <input class="textfield" type="text" name="partno">
-    <button type="submit">
+    <br>
+    <button formaction="/edit/" type="submit">
       Edit
     </button>
-  </form>
-  <form action="/delete/" method="POST">
-    {% csrf_token %}
-    <input class="textfield" type="text" name="partno">
-    <button type="submit">
+    <button formaction="/delete/" type="submit">
       Delete
     </button>
   </form>
+  <br>
   <table>
     <thead>
       <tr>
