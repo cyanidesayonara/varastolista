@@ -100,7 +100,6 @@ canvas.drawing, canvas.drawingBuffer {
     overflow: hidden;
     padding: 0;
     position: absolute;
-    width: 100%;
   }
   tr {
     display: block;
