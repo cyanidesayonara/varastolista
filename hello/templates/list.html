@@ -22,22 +22,27 @@
     <br>
     <button formaction="/new/" type="submit">
       New
+      <i class="fas fa-plus-square"></i>
     </button>
     <input type="checkbox" name="plus">
       Add +1
     <br>
     <button formaction="/plus/" type="submit">
       Add
+      <i class="fas fa-plus"></i>
     </button>
     <button formaction="/minus/" type="submit">
       Subtract
+      <i class="fas fa-minus"></i>
     </button>
     <br>
     <button formaction="/edit/" type="submit">
       Edit
+      <i class="fas fa-edit"></i>
     </button>
     <button formaction="/delete/" type="submit">
       Delete
+      <i class="fas fa-trash-alt"></i>
     </button>
   </form>
   <br>
@@ -53,17 +58,17 @@
     <tbody>
       {% for part in parts %}
         <tr>
-          <td>
+          <td data-label="Partno">
             <span>
               {{ part.partno }}
             </span>
           </td>
-          <td>
+          <td data-label="Updated">
             <span>
               {{ part.updated_at }}
             </span>
           </td>
-          <td>
+          <td data-label="Total">
             <span>
               {{ part.total }}
             </span>
