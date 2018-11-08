@@ -1,6 +1,12 @@
 {% extends request.is_ajax|yesno:"ajax.html,base.html" %}
 
 {% block content %}
+  <form action="/logoff/" method="POST">
+    {% csrf_token %}
+    <button style="float:right" type="submit">
+      Logout
+    </button>   
+  </form>
   <div id="scanner-container"></div>
   <button type="button" class="scanner">
     Start/Stop Scanner

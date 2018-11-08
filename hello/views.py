@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from .models import Part
 
@@ -23,6 +23,11 @@ def signin(request):
         user = authenticate(username=username, password=password)
         if user is not None:
             login(request, user)
+    return redirect('/')
+
+def logoff(request):
+    if request.method == "POST":
+        logout(request)
     return redirect('/')
 
 

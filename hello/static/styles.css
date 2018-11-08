@@ -65,8 +65,12 @@ table {
   table-layout:fixed;
   border-collapse: collapse;
 }
-tr {
+tbody {
+  border-top: 1px solid black;
   border-bottom: 1px solid black;
+}
+tr:not(:first-of-type) {
+  border-top: 1px solid black;
 }
 th,
 td {
