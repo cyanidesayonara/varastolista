@@ -58,7 +58,8 @@ nav h1 {
   padding: 40px;
 }
 #scanner-container > * {
-  width: 50%;
+  height: 70%;
+  width: 70%;
 }
 table {
   table-layout:fixed;
