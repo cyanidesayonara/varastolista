@@ -149,10 +149,11 @@ $(document)
     e.preventDefault();
     var url = $(this).data("url");
     var dump = $(this).data("dump");
+    console.log(url)
+    pushState(url);
     if (dump == "#modal") {
       openModal();
     }
-    pushState(url);
     $.ajax({
       type: "GET",
       url: url,

@@ -1,6 +1,10 @@
-venv
 *.pyc
-staticfiles
-.env
-db.sqlite3
-getting-started/*
+*.pyo
+__pycache__
+/.idea
+/static
+.DS_Store
+/logs
+logs.txt
+/.vscode
+manage.py

@@ -64,6 +64,7 @@ nav h1 {
 table {
   table-layout:fixed;
   border-collapse: collapse;
+  width: 100%;
 }
 tbody {
   border-top: 1px solid black;
@@ -91,10 +92,6 @@ canvas.drawing, canvas.drawingBuffer {
 }
 
 @media screen and (max-width: 767px) {
-  table {
-    table-layout: fixed;
-    width: 100%;
-  }
   table thead {
     height: 1px;
     overflow: hidden;
