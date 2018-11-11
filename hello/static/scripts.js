@@ -139,7 +139,6 @@ $(document)
     toggleTorch();
   })
   .on("click", "#modal", function(e) {
-    console.log(e.target)
     if (e.target != this) {
       return false;
     }
