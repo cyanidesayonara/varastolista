@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Python: Getting Started
 
 A barebones Django app, which can easily be deployed to Heroku.
@@ -43,3 +44,7 @@ or
 For more information about using Python on Heroku, see these Dev Center articles:
 
 - [Python on Heroku](https://devcenter.heroku.com/categories/python)
+=======
+# untitled-inventory-app
+Simple CRUD inventory app for my friend's warehouse
+>>>>>>> e066b7b9497096eae4b993fb1e43a331e2ce2eb6
