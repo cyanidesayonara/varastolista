@@ -1,0 +1,49 @@
+<table>
+  <thead>
+    <tr>
+      <th>partno</th>
+      <th>updated</th>
+      <th>total</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for part in parts %}
+    <tr>
+      <td data-label="Partno">
+        <span>
+          {{ part.partno }}
+        </span>
+      </td>
+      <td data-label="Updated">
+        <span>
+          {{ part.updated_at }}
+        </span>
+      </td>
+      <td data-label="Total">
+        <span>
+          {{ part.total }}
+        </span>
+      </td>
+      <td>
+        <form method="POST">
+          {% csrf_token %}
+          <input type="hidden" name="partno" value="{{ part.partno }}">
+          <button class="ajax" data-dump=".list" data-url="/plus/" formaction="/plus/" type="submit">
+            <i class="fas fa-plus"></i>
+          </button>
+          <button class="ajax" data-dump=".list" data-url="/minus/" formaction="/minus/" type="submit">
+            <i class="fas fa-minus"></i>
+          </button>
+          <button class="ajax" data-dump=".list" data-url="/edit/" formaction="/edit/" type="submit">
+            <i class="fas fa-edit"></i>
+          </button>
+          <button class="ajax" data-dump=".list" data-url="/delete/" formaction="/delete/" type="submit">
+            <i class="fas fa-trash-alt"></i>
+          </button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>

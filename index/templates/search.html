@@ -1,0 +1,22 @@
+<h2>
+  Search part
+</h2>
+<form method="GET">
+  <label>
+    Partno
+  </label>
+  <br>
+  <input class="q" type="text" name="partno" value="{{ partno }}">
+  <br>
+  <button class="ajax" data-dump=".search" data-url="/search/" formaction="/search/" type="submit">
+    Search
+    <i class="fas fa-search"></i>
+  </button>
+</form>
+
+<button type="button" class="scanner">
+  Start/Stop Scanner
+</button>
+<div id="scanner-container"></div>
+
+{% include 'detail.html' %}

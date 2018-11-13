@@ -1,0 +1,33 @@
+{% if part %}
+  <h2>
+    Edit part
+  </h2>
+  <form method="POST">
+    {% csrf_token %}
+    <input type="hidden" name="partno" value="{{ part.partno }}">
+    <input type="text" name="new_partno" value="{{ part.partno }}">
+    <button class="ajax" data-dump=".main" data-url="/plus/" formaction="/plus/" type="submit">
+      <i class="fas fa-plus"></i>
+    </button>
+    <button class="ajax" data-dump=".main" data-url="/minus/" formaction="/minus/" type="submit">
+      <i class="fas fa-minus"></i>
+    </button>
+    <button class="ajax" data-dump=".main" data-url="/delete/" formaction="/delete/" type="submit">
+      <i class="fas fa-trash-alt"></i>
+    </button>
+    <button class="ajax" data-dump=".main" data-url="/edit/" formaction="/edit/" type="submit">
+      <i class="fas fa-save"></i>
+    </button>
+  </form>
+{% elif partno %}
+  <h2>
+    Not found! - Add part
+  </h2>
+  <form method="POST">
+    {% csrf_token %}
+    <input type="text" name="partno" value="{{ part.partno }}">
+    <button class="ajax" data-dump=".main" data-url="/new/" formaction="/new/" type="submit">
+      <i class="fas fa-plus-square"></i>
+    </button>
+  </form>
+{% endif %}
