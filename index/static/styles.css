@@ -1,5 +1,6 @@
-.jesus {
+#jesus {
   text-align: center;
+  overflow: hidden;
 }
 html {
   box-sizing: border-box;
@@ -8,11 +9,10 @@ html {
   box-sizing: inherit;
 }
 body {
+  background: rgb(240, 240, 240);
   font-family: 'K2D', sans-serif;
   position: relative;
   min-height: 100vh;  
-  margin: auto;
-  max-width: 800px;
 }
 a {
   color: black;
@@ -33,15 +33,6 @@ nav {
 }
 nav h1 a {
   color: #fff;
-}
-#content::before {
-  background: rgba(150, 150, 150, .2);
-  position: absolute;
-  content: "";
-  height: 100%;
-  width: 100%;
-  z-index: -1;
-  opacity: .5;
 }
 #content > * {
   padding: 20px;
@@ -67,7 +58,6 @@ nav h1 a {
   width: 70%;
 }
 table {
-  table-layout:fixed;
   border-collapse: collapse;
   width: 100%;
   margin: 20px 0;

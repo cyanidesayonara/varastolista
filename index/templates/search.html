@@ -3,12 +3,12 @@
 </h2>
 <form method="GET">
   <label>
-    Partno
+    Part number or shelf
   </label>
   <br>
-  <input class="q" type="text" name="partno" value="{{ partno }}">
+  <input class="q" type="text" name="q">
   <br>
-  <button class="ajax" data-dump=".search" data-url="/search/" formaction="/search/" type="submit">
+  <button class="ajax" data-dump="#main" data-url="/search/" formaction="/search/" type="submit">
     Search
     <i class="fas fa-search"></i>
   </button>
@@ -18,5 +18,3 @@
   Start/Stop Scanner
 </button>
 <div id="scanner-container"></div>
-
-{% include 'detail.html' %}

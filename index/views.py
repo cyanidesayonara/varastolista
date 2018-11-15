@@ -4,6 +4,8 @@ from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
+from django.db.models import Q
+from tablib import Dataset
 from .models import Part
 
 def index(request):
@@ -30,33 +32,43 @@ def logout_view(request):
         logout(request)
     return redirect('/')
 
+def simple_upload(request):
+    if request.method == 'POST':
+        person_resource = PersonResource()
+        dataset = Dataset()
+        new_persons = request.FILES['myfile']
+
+        imported_data = dataset.load(new_persons.read())
+        result = person_resource.import_data(
+            dataset, dry_run=True)  # Test the data import
+
+        if not result.has_errors():
+            person_resource.import_data(
+                dataset, dry_run=False)  # Actually import now
+
+    return render(request, 'core/simple_upload.html')
 
 @login_required
 def search(request):
     if request.method == 'GET':
-        partno = request.GET.get('partno')
-        if partno:
-            context = {
-                'partno': partno,
-            }
+        context = {}
+        q = request.GET.get('q')
+        if q:
+            context.update({
+                'q': q,
+            })
             try:
-                part = Part.objects.get(partno=partno)
+                parts = Part.objects.filter(Q(partno__icontains=q) |
+                                            Q(shelf__icontains=q) |
+                                            Q(group__icontains=q) |
+                                            Q(description__icontains=q))
                 context.update({
-                    'part': part,
+                    'parts': parts,
                 })
             except Part.DoesNotExist:
                 pass
-            if request.is_ajax():
-                return render(request, 'search.html', context)
             return render(request, 'index.html', context)
         return redirect('/')
-
-def list_view(request):
-    if request.method == 'GET':
-        context = {
-            'parts': Part.objects.all(),
-        }
-        return render(request, 'list.html', context)
 
 @login_required
 @transaction.atomic
@@ -71,13 +83,12 @@ def new(request):
                         part.update()
                         part.total = 1
                         part.save()
-                context = {
-                    'parts': Part.objects.all(),
-                }
-                return render(request, 'search.html', context)
             except Part.DoesNotExist:
                 pass
-        return redirect('/')
+        context = {
+            'parts': Part.objects.all(),
+        }
+        return render(request, 'index.html', context)
 
 @login_required
 @transaction.atomic
@@ -90,13 +101,12 @@ def plus(request):
                 part.plus()
                 part.update()
                 part.save()
-                context = {
-                    'parts': Part.objects.all(),
-                }
-                return render(request, 'list.html', context)
             except Part.DoesNotExist:
                 pass
-        return redirect('/')
+        context = {
+            'parts': Part.objects.all(),
+        }
+        return render(request, 'index.html', context)
 
 @login_required
 @transaction.atomic
@@ -109,13 +119,12 @@ def minus(request):
                 part.minus()
                 part.update()
                 part.save()
-                context = {
-                    'parts': Part.objects.all(),
-                }
-                return render(request, 'list.html', context)
             except Part.DoesNotExist:
                 pass
-        return redirect('/')
+        context = {
+            'parts': Part.objects.all(),
+        }
+        return render(request, 'index.html', context)
 
 @login_required
 @transaction.atomic
@@ -128,13 +137,12 @@ def edit(request):
                 part = Part.objects.get(partno=partno)
                 part.partno = new_partno
                 part.save()
-                context = {
-                    'parts': Part.objects.all(),
-                }
-                return render(request, 'list.html', context)
             except Part.DoesNotExist:
                 pass
-        return redirect('/')
+        context = {
+            'parts': Part.objects.all(),
+        }
+        return render(request, 'index.html', context)
 
 @login_required
 @transaction.atomic
@@ -145,10 +153,9 @@ def delete(request):
             try:
                 part = Part.objects.get(partno=partno)
                 part.delete()
-                context = {
-                    'parts': Part.objects.all(),
-                }
-                return render(request, 'list.html', context)
             except Part.DoesNotExist:
                 pass
-        return redirect('/')
+        context = {
+            'parts': Part.objects.all(),
+        }
+        return render(request, 'index.html', context)

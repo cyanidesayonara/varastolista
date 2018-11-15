@@ -11,14 +11,14 @@ function toggleModal() {
   $("#modal").toggle();
 };
 function pushState(url) {
-  // return if url not in urls
-  var urls = ["search"];
+  // return if url in urls
+  var urls = ["new", "plus", "minus", "edit", "delete"];
   for (var i = 0; i < urls.length; i++) {
-    if (!url.includes(urls[i])) {
+    if (url.includes(urls[i])) {
       return;
     }
   }  
-  var main = $(".main");
+  var main = $("#main");
   var context = main[0].innerHTML;
   var state = {
     "context": context,
@@ -27,14 +27,14 @@ function pushState(url) {
   history.pushState(state, "", url);
 };
 function replaceState(url) {
-  // return if url not in urls
-  var urls = ["search"];
+  // return if url in urls
+  var urls = ["new", "plus", "minus", "edit", "delete"];
   for (var i = 0; i < urls.length; i++) {
-    if (!url.includes(urls[i])) {
+    if (url.includes(urls[i])) {
       return;
     }
   }  
-  var main = $(".main");
+  var main = $("#main");
   var context = main[0].innerHTML;
   var state = {
     "context": context,
@@ -173,12 +173,20 @@ $(document)
     var form = button.parents("form");
     if (form.length) {
       var method = form.attr("method");
-      var data = form.serialize();
       var q = form.children(".q").val();
-      if (q) {
-        q = cleanString(q);
-        url = url + "?partno=" + q;
-      }      
+      if (method == "GET") {
+        if (q) {
+          pushState(url);
+          q = cleanString(q);
+          console.log(q)
+          url = url + "?q=" + q;
+          var data = undefined;
+        } else {
+          return;
+        }
+      } else {
+        var data = form.serialize();
+      }
     } else {
       pushState(url);
       var method = "GET";
@@ -205,6 +213,6 @@ $(window)
   .on("popstate", function (e) {
     var state = e.originalEvent.state;
     if (state) {
-      $(".main").html(state.context);
+      $("#main").html(state.context);
     }
-  })
+  });

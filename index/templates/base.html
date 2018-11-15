@@ -13,26 +13,25 @@
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" />
   <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.4.2/css/all.css">
   <link rel="stylesheet" href="{% static 'styles.css' %}" />
-  <title>Miko's fancy inventory app</title>
+  <title>Miko's home page</title>
 </head>
 
 <body>
   <div id="content">
     <nav>
       <h1>
-        <a class="ajax" href="/" data-url="/" data-dump=".main">
-          Miko's fancy inventory app
+        <a class="ajax" href="/" data-url="/" data-dump="#main">
+          Miko's home page
         </a>
       </h1>
     </nav>
-    <div class="main">
-      {% block content %}
+    <div id="main">
+      {% block main %}
       {% endblock %}
     </div>
-    <div class="jesus">
+    <div id="jesus">
       <img src="{% static 'jesus1.gif' %}" />
       <img src="{% static 'jesus2.gif' %}" />
-      <img src="{% static 'jesus3.gif' %}" />
     </div>
   </div>
   <div id="modal">
