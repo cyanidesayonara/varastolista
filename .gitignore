@@ -1,11 +1,6 @@
+venv
 *.pyc
-*.pyo
-__pycache__
-/.idea
-/static
-.DS_Store
-/logs
-logs.txt
-/.vscode
-local_settings.py
-manage.py
+staticfiles
+.env
+db.sqlite3
+getting-started/*
