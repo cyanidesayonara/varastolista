@@ -1,7 +1,7 @@
 {% extends request.is_ajax|yesno:"ajax.html,base.html" %}
 
-{% block content %}
-  <div class="login">
+{% block main %}
+  <div class="centered">
     <form action="/login/" method="POST">
       {% csrf_token %}
       <label>Username</label>

@@ -40,6 +40,9 @@ nav h1 a {
 #main {
   min-height: 100vh;
 }
+.centered {
+  text-align: center;
+}
 #modal {
   display: none;
   text-align: center;

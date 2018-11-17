@@ -1,5 +1,14 @@
+<form action="/logout/" method="POST">
+  {% csrf_token %}
+  <button style="float:right" type="submit">
+    Logout
+  </button>
+</form>
+<p>
+  &nbsp;
+</p>
 <h2>
-  Search part
+  Search for part
 </h2>
 <form method="GET">
   <label>
@@ -13,7 +22,6 @@
     <i class="fas fa-search"></i>
   </button>
 </form>
-
 <button type="button" class="scanner">
   Start/Stop Scanner
 </button>

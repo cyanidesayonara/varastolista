@@ -1,16 +1,10 @@
 {% extends request.is_ajax|yesno:"ajax.html,base.html" %}
 
 {% block main %}
-  <form action="/logout/" method="POST">
-    {% csrf_token %}
-    <button style="float:right" type="submit">
-      Logout
-    </button>
-  </form>
-  <div class="search">
+  <div class="centered">
     {% include 'search.html' %}
   </div>
-  <div class="list">
+  <div id="list">
     {% include 'list.html' %}
   </div>
 {% endblock %}

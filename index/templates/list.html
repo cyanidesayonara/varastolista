@@ -23,7 +23,7 @@
               {% if part.partno %}
                 {{ part.partno }}
               {% else %}
-                x
+                &nbsp;
               {% endif %}
             </span>
           </td>
@@ -32,7 +32,7 @@
               {% if part.description %}
                 {{ part.description }}
               {% else %}
-                x
+                &nbsp;
               {% endif %}
             </span>
           </td>
@@ -41,7 +41,7 @@
               {% if part.location %}
                 {{ part.location }}
               {% else %}
-                x
+                &nbsp;
               {% endif %}
             </span>
           </td>
@@ -50,7 +50,7 @@
               {% if part.shelf %}
                 {{ part.shelf }}
               {% else %}
-                x
+                &nbsp;
               {% endif %}
             </span>
           </td>
@@ -59,7 +59,7 @@
               {% if part.group %}
                 {{ part.group }}
               {% else %}
-                x
+                &nbsp;
               {% endif %}
             </span>
           </td>
@@ -70,10 +70,10 @@
           </td>
           <td data-label="Price">
             <span>
-              {% if part.group %}
+              {% if part.price %}
                 €{{ part.price }}
               {% else %}
-                x
+                &nbsp;
               {% endif %}
             </span>
           </td>
@@ -82,7 +82,7 @@
               {% if part.primary_order_address %}
                 {{ part.primary_order_address }}
               {% else %}
-                x
+                &nbsp;
               {% endif %}
             </span>
           </td>
@@ -91,7 +91,7 @@
               {% if part.secondary_order_address %}
                 {{ part.secondary_order_address }}
               {% else %}
-                x
+                &nbsp;
               {% endif %}
             </span>
           </td>
@@ -100,7 +100,7 @@
               {% if part.extra_info %}
                 {{ part.extra_info }}
               {% else %}
-                x
+                &nbsp;
               {% endif %}
             </span>
           </td>
