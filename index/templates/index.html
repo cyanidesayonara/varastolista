@@ -1,10 +1,11 @@
 {% extends request.is_ajax|yesno:"ajax.html,base.html" %}
 
 {% block main %}
-  <div class="centered">
-    {% include 'search.html' %}
-  </div>
-  <div id="list">
-    {% include 'list.html' %}
-  </div>
+  {% if user.is_authenticated %}
+    {% include "topbar.html" %}
+    {% include "search.html" %}
+    {% include "list.html" %}
+  {% else %}
+    {% include "login.html" %}
+  {% endif %}
 {% endblock %}

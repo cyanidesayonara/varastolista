@@ -11,12 +11,12 @@ from .models import Part
 def index(request):
     if request.method == 'GET':
         user = request.user
+        context = {}
         if user.is_authenticated:
-            context = {
+            context.update({
                 'parts': Part.objects.all(),
-            }
-            return render(request, 'index.html', context)
-        return render(request, 'login.html', {})
+            })
+        return render(request, 'index.html', context)
 
 def login_view(request):
     if request.method == 'POST':
@@ -31,22 +31,6 @@ def logout_view(request):
     if request.method == "POST":
         logout(request)
     return redirect('/')
-
-def simple_upload(request):
-    if request.method == 'POST':
-        person_resource = PersonResource()
-        dataset = Dataset()
-        new_persons = request.FILES['myfile']
-
-        imported_data = dataset.load(new_persons.read())
-        result = person_resource.import_data(
-            dataset, dry_run=True)  # Test the data import
-
-        if not result.has_errors():
-            person_resource.import_data(
-                dataset, dry_run=False)  # Actually import now
-
-    return render(request, 'core/simple_upload.html')
 
 @login_required
 def search(request):

@@ -146,7 +146,8 @@ $(document)
   .ready(function() {
     replaceState(window.location.href);
   })
-  .on("click", ".scanner", function() {
+  .on("click", ".scanner", function (e) {
+    e.preventDefault();
     $('#scanner-container').empty();
     // Start/stop scanner
     if (_scannerIsRunning) {
@@ -156,16 +157,11 @@ $(document)
       startQuagga();
     }
   })
-  .on("click", ".torch", function () {
+  .on("click", ".torch", function (e) {
+    e.preventDefault();    
     toggleTorch();
   })
-  .on("click", "#modal", function(e) {
-    if (e.target != this) {
-      return false;
-    }
-    closeModal();
-  })
-  .on("click", ".ajax", function(e) {
+  .on("click", ".ajax", function (e) {
     e.preventDefault();
     var button = $(this);
     var url = button.data("url");
@@ -207,6 +203,12 @@ $(document)
         $(dump).html(response);
         replaceState(url);
       });
+  })
+  .on("click", ".edit", function (e) {
+    e.preventDefault();
+    console.log($(this).parents("tr").attr("class"))
+    const row = $(this).parents("tr").attr("class")
+    $("." + row).toggleClass("d-none");
   });
 
 $(window)

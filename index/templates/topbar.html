@@ -1,0 +1,13 @@
+<div id="topbar">
+  <form action="/logout/" method="POST">
+    {% csrf_token %}
+    <button type="submit">
+      Logout
+    </button>
+  </form>
+  <button type="button" class="scanner">
+    Start/Stop Scanner
+  </button>
+</div>
+<div id="scanner-container">
+</div>
