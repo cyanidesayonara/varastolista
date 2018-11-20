@@ -7,11 +7,15 @@
       Part number/shelf/group/description
     </label>
     <br>
-    <input class="q" type="text" name="q">
+    <input id="q" type="text" name="q">
     <br>
     <button class="ajax" data-dump="#main" data-url="/search/" formaction="/search/" type="submit">
       Search
       <i class="fas fa-search"></i>
+    </button>
+    <button type="button" id="scanneron">
+      Read QR-code
+      <i class="fas fa-qrcode"></i>
     </button>
   </form>
 </div>

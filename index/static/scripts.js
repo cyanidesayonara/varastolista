@@ -1,11 +1,14 @@
-var _scannerIsRunning = false;
-var _torchIsLit = false;
-
-function openModal() {
-  $("#modal").fadeIn();
+function openModal(el, id) {
+  el = document.createElement(el);
+  el.id = id;
+  let modal = document.getElementById("modal");
+  modal.appendChild(el);
+  modal.style.display = "block";
 };
 function closeModal() {
-  $("#modal").fadeOut();
+  let modal = document.getElementById("modal");
+  modal.innerHTML = "";
+  modal.style.display = "";
 };
 function toggleModal() {
   $("#modal").toggle();
@@ -49,117 +52,40 @@ function cleanString(q) {
   q = q.replace(/([^a-zA-Z0-9\u0080-\uFFFF +']+)/gi, "");
   return q.toLowerCase();
 };
-function startQuagga() {
-  Quagga.init({
-    inputStream: {
-      name: "Live",
-      type: "LiveStream",
-      target: document.querySelector('#scanner-container'),
-      constraints: {
-        width: 800,
-        height: 600,
-        facingMode: "environment"
-      },
-    },
-    decoder: {
-      readers: [
-        "ean_reader",
-      ],
-      debug: {
-        showCanvas: true,
-        showPatches: true,
-        showFoundPatches: true,
-        showSkeleton: true,
-        showLabels: true,
-        showPatchLabels: true,
-        showRemainingPatchLabels: true,
-        boxFromPatches: {
-          showTransformed: true,
-          showTransformedBox: true,
-          showBB: true
-        }
-      }
-    },
-
-  }, function(err) {
-    if (err) {
-      console.log(err);
-      return
-    }
-
-    console.log("Initialization finished. Ready to start");
-    // Set flag to is running
-    _scannerIsRunning = true;
-    Quagga.start();
+function initScanner() {
+  openModal("video", "scanner");
+  let scanner = new Instascan.Scanner({
+    video: document.getElementById("scanner")
   });
-
-  Quagga.onProcessed(function (result) {
-    var drawingCtx = Quagga.canvas.ctx.overlay,
-      drawingCanvas = Quagga.canvas.dom.overlay;
-
-    if (result) {
-      if (result.boxes) {
-        drawingCtx.clearRect(0, 0, parseInt(drawingCanvas.getAttribute("width")), parseInt(drawingCanvas.getAttribute("height")));
-        result.boxes.filter(function (box) {
-          return box !== result.box;
-        }).forEach(function (box) {
-          Quagga.ImageDebug.drawPath(box, { x: 0, y: 1 }, drawingCtx, { color: "green", lineWidth: 2 });
-        });
-      }
-
-      if (result.box) {
-        Quagga.ImageDebug.drawPath(result.box, { x: 0, y: 1 }, drawingCtx, { color: "#00F", lineWidth: 2 });
-      }
-
-      if (result.codeResult && result.codeResult.code) {
-        Quagga.ImageDebug.drawPath(result.line, { x: 'x', y: 'y' }, drawingCtx, { color: 'red', lineWidth: 3 });
-      }
-    }
+  scanner.addListener("scan", function (content) {
+    $("#q").val(content);
+    scanner.stop();
+    closeModal();
   });
-
-  Quagga.onDetected(function (result) {
-    $(".textfield").val(result.codeResult.code);
-    Quagga.stop();
-    $('#scanner-container').empty();
-    _scannerIsRunning = false;
-  });
-};
-function toggleTorch() {
-  const video = document.querySelector('video');
-  if (video) {
-    const stream = video.srcObject;
-    
-    // get the active track of the stream
-    const track = stream.getVideoTracks()[0];
-    const capabilities = track.getCapabilities();
-
-    if (capabilities.torch) {
-      track.applyConstraints({
-        advanced: [{ torch: true }]
+  Instascan.Camera.getCameras().then(function (cameras) {
+    if (cameras.length > 0) {
+      scanner.start(cameras[0]);
+      $("#modal").click(function () {
+        scanner.stop();
+        closeModal();
       })
-        .catch(e => console.log(e));
+    } else {
+      console.error("No cameras found.");
+      closeModal();
     }
-  }
+  }).catch(function (e) {
+    console.error(e);
+    closeModal();
+  });
 };
 
 $(document)
   .ready(function() {
     replaceState(window.location.href);
   })
-  .on("click", ".scanner", function (e) {
+  .on("click", "#scanneron", function (e) {
     e.preventDefault();
-    $('#scanner-container').empty();
-    // Start/stop scanner
-    if (_scannerIsRunning) {
-      Quagga.stop();
-      _scannerIsRunning = false;
-    } else {
-      startQuagga();
-    }
-  })
-  .on("click", ".torch", function (e) {
-    e.preventDefault();    
-    toggleTorch();
+    initScanner();
   })
   .on("click", ".ajax", function (e) {
     e.preventDefault();
@@ -169,7 +95,7 @@ $(document)
     var form = button.parents("form");
     if (form.length) {
       var method = form.attr("method");
-      var q = form.children(".q").val();
+      var q = form.children("#q").val();
       if (method == "GET") {
         if (q) {
           pushState(url);
@@ -206,9 +132,14 @@ $(document)
   })
   .on("click", ".edit", function (e) {
     e.preventDefault();
-    console.log($(this).parents("tr").attr("class"))
-    const row = $(this).parents("tr").attr("class")
-    $("." + row).toggleClass("d-none");
+    let row = $(this).parents(".tr");
+    row.addClass("toggled")
+      .find(".toggle")
+      .toggleClass("d-none");
+    row.siblings(".toggled")
+      .removeClass("toggled")
+      .find(".toggle")
+      .toggleClass("d-none");
   });
 
 $(window)

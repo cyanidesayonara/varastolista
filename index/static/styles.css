@@ -65,43 +65,51 @@ footer {
 #topbar > * {
   float: right;
 }
-#scanner-container > * {
-  width: 70%;
-  margin: 0 15%;
-}
-table {
+.table {
+  display: table;
   table-layout: fixed;
   border-collapse: collapse;
   width: 100%;
   margin: 20px 0;
   text-align: left;
+  vertical-align: middle;
 }
-tbody {
-  border-top: 1px solid black;
+.tr {
+  display: table-row;
+  vertical-align: middle;
   border-bottom: 1px solid black;
 }
-tr:not(:first-of-type) {
-  border-top: 1px solid black;
-}
-th,
-td {
+.th,
+.td {
+  display: table-cell;
   word-wrap: break-word;
   padding: 5px;
+  vertical-align: middle;
 }
-td input {
+.td input {
   width: 100%;
 }
-thead th:last-child {
+.th:last-child {
   width: 175px;
 }
 .d-none {
   display: none;
 }
-#scanner-container {
-  position: relative;
+#modal {
+  display: none;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(50,50,50,.5);
 }
-#scanner-container>* {
-  max-width: 100%;
+#modal video {
+  position: absolute;
+  left: 50%;
+  top: 250px;
+  max-width: 80%;
+  transform: translate(-50%, -50%) scaleX(-1)!important;
 }
 canvas.drawing, canvas.drawingBuffer {
     position: absolute;
@@ -110,22 +118,23 @@ canvas.drawing, canvas.drawingBuffer {
 }
 
 @media screen and (max-width: 767px) {
-  table thead {
+  .tr:first-child {
     height: 1px;
     overflow: hidden;
     padding: 0;
     position: absolute;
+    width: 100%;
   }
-  tr {
+  .tr {
     display: block;
   }
-  th,
-  td {
+  .th,
+  .td {
     display: block;
     text-align: right;
   }
-  td::before,
-  th::before {
+  .td::before,
+  .th::before {
     content: attr(data-label);
     float: left;
     margin-right: 10px;

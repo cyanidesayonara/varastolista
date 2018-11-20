@@ -4,11 +4,11 @@
   </h2>
   <form action="/login/" method="POST">
     {% csrf_token %}
-    <label>Username</label>
+    <label for="username">Username</label>
     <br>
     <input type="text" name="username" required autofocus>
     <br>
-    <label>Password</label>
+    <label for="password">Password</label>
     <br>
     <input type="password" name="password" required>
     <br>

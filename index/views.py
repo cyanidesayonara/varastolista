@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from django.db.models import Q
 from tablib import Dataset
 from .models import Part
+from .forms import PartForm
 
 def index(request):
     if request.method == 'GET':
@@ -114,15 +115,18 @@ def minus(request):
 @transaction.atomic
 def edit(request):
     if request.method == 'POST':
-        partno = request.POST.get('partno')
-        new_partno = request.POST.get('new_partno')
+        partno = request.POST.get('orig_partno')
         if partno:
             try:
                 part = Part.objects.get(partno=partno)
-                part.partno = new_partno
-                part.save()
+                form = PartForm(request.POST, instance=part)
+                if form.is_valid():
+                    form.save()
             except Part.DoesNotExist:
                 pass
+        else:
+            # TODO
+            print("no bueno")
         context = {
             'parts': Part.objects.all(),
         }

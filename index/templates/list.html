@@ -1,217 +1,179 @@
 <div id="list">
   {% if q %}
-    <p>{{ parts.count }} results for "{{ q }}"</p>
-    <button class="ajax" href="/" data-url="/" data-dump="#main">
-      Show All
-    </button>
+  <p>{{ parts.count }} results for "{{ q }}"</p>
+  <button class="ajax" href="/" data-url="/" data-dump="#main">
+    Show All
+  </button>
   {% endif %}
   {% if parts %}
-    <table>
-      <thead>
-        <tr>
-          <th>Partno</th>
-          <th>Description</th>
-          <th>Location</th>
-          <th>Shelf</th>
-          <th>Group</th>
-          <th>Total</th>
-          <th>Price (€)</th>
-          <th>1st address</th>
-          <th>2nd address</th>
-          <th>Extra info</th>
-          <th>Update</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for part in parts %}
-          <tr class="part-{{ forloop.counter }}">
-            <td data-label="Partno">
-              <span>
-                {% if part.partno %}
-                  {{ part.partno }}
-                {% else %}
-                  &nbsp;
-                {% endif %}
-              </span>
-            </td>
-            <td data-label="Description">
-              <span>
-                {% if part.description %}
-                  {{ part.description }}
-                {% else %}
-                  &nbsp;
-                {% endif %}
-              </span>
-            </td>
-            <td data-label="Location">
-              <span>
-                {% if part.location %}
-                  {{ part.location }}
-                {% else %}
-                  &nbsp;
-                {% endif %}
-              </span>
-            </td>
-            <td data-label="Shelf">
-              <span>
-                {% if part.shelf %}
-                  {{ part.shelf }}
-                {% else %}
-                  &nbsp;
-                {% endif %}
-              </span>
-            </td>
-            <td data-label="Group">
-              <span>
-                {% if part.group %}
-                  {{ part.group }}
-                {% else %}
-                  &nbsp;
-                {% endif %}
-              </span>
-            </td>
-            <td data-label="Total">
-              <span>
-                {{ part.total }}
-              </span>
-            </td>
-            <td data-label="Price (€)">
-              <span>
-                {% if part.price %}
-                  {{ part.price }}
-                {% else %}
-                  &nbsp;
-                {% endif %}
-              </span>
-            </td>
-            <td data-label="1st Address">
-              <span>
-                {% if part.primary_order_address %}
-                  {{ part.primary_order_address }}
-                {% else %}
-                  &nbsp;
-                {% endif %}
-              </span>
-            </td>
-            <td data-label="2nd Address">
-              <span>
-                {% if part.secondary_order_address %}
-                  {{ part.secondary_order_address }}
-                {% else %}
-                  &nbsp;
-                {% endif %}
-              </span>
-            </td>
-            <td data-label="Extra Info">
-              <span>
-                {% if part.extra_info %}
-                  {{ part.extra_info }}
-                {% else %}
-                  &nbsp;
-                {% endif %}
-              </span>
-            </td>
-            <td data-label="Update">
-              <form method="POST">
-                {% csrf_token %}
-                <input type="hidden" name="partno" value="{{ part.partno }}">
-                <button class="ajax" data-dump="#main" data-url="/plus/" formaction="/plus/" type="submit">
-                  <i class="fas fa-plus"></i>
-                </button>
-                <button class="ajax" data-dump="#main" data-url="/minus/" formaction="/minus/" type="submit">
-                  <i class="fas fa-minus"></i>
-                </button>
-                <button class="edit" type="button">
-                  <i class="fas fa-edit"></i>
-                </button>
-                <button class="ajax" data-dump="#main" data-url="/delete/" formaction="/delete/" type="submit">
-                  <i class="fas fa-trash-alt"></i>
-                </button>
-              </form>
-            </td>
-          </tr>
-          <tr class="part-{{ forloop.counter }} d-none">
-            <form method="POST">
-              {% csrf_token %}
-              <input type="hidden" name="orig_partno" value="{{ part.partno }}" />
-              <td data-label="Partno">
-                {% if part.partno %}
-                  <input type="text" name="partno" value="{{ part.partno }}" />
-                {% else %}
-                  <input type="text" name="partno" value="" />
-                {% endif %}
-              </td>
-              <td data-label="Description">
-                {% if part.description %}
-                  <input type="text" name="description" value="{{ part.description }}" />
-                {% else %}
-                  <input type="text" name="description" value="" />
-                {% endif %}
-              </td>
-              <td data-label="Location">
-                {% if part.location %}
-                  <input type="text" name="location" value="{{ part.location }}" />
-                {% else %}
-                  <input type="text" name="location" value="" />
-                {% endif %}
-              </td>
-              <td data-label="Shelf">
-                {% if part.shelf %}
-                  <input type="text" name="shelf" value="{{ part.shelf }}" />
-                {% else %}
-                  <input type="text" name="shelf" value="" />
-                {% endif %}
-              </td>
-              <td data-label="Group">
-                {% if part.group %}
-                  <input type="text" name="group" value="{{ part.group }}" />
-                {% else %}
-                  <input type="text" name="group" value="" />
-                {% endif %}
-              </td>
-              <td data-label="Total">
-                <input type="text" name="total" value="{{ part.total }}" />
-              </td>
-              <td data-label="Price (€)">
-                {% if part.price %}
-                  <input type="text" name="price" value="{{ part.price }}" />
-                {% else %}
-                  <input type="text" name="price" value="" />
-                {% endif %}
-              </td>
-              <td data-label="1st Address">
-                {% if part.primary_order_address %}
-                  <input type="text" name="primary_order_address" value="{{ part.primary_order_address }}" />
-                {% else %}
-                  <input type="text" name="primary_order_address" value="" />
-                {% endif %}
-              </td>
-              <td data-label="2nd Address">
-                {% if part.secondary_order_address %}
-                  <input type="text" name="secondary_order_address" value="{{ part.secondary_order_address }}" />
-                {% else %}
-                  <input type="text" name="secondary_order_address" value="" />
-                {% endif %}
-              </td>
-              <td data-label="Extra Info">
-                {% if part.extra_info %}
-                  <input type="text" value="{{ part.extra_info }}" />
-                {% else %}
-                  <input type="text" value="" />
-                {% endif %}
-              </td>
-              <td data-label="Update">
-                <button class="ajax" data-dump="#main" data-url="/edit/" formaction="/edit/" type="submit">
-                  <i class="fas fa-save"></i>
-                </button>
-                <button class="edit" type="button">
-                  <i class="fas fa-undo-alt"></i>
-                </button>
-              </td>
-            </form>
-          </tr>       
-        {% endfor %}
-      </tbody>
-    </table>
-  {% endif %}
+  <div class="table">
+    <div class="tr">
+      <div class="th">Partno</div>
+      <div class="th">Description</div>
+      <div class="th">Location</div>
+      <div class="th">Shelf</div>
+      <div class="th">Group</div>
+      <div class="th">Total</div>
+      <div class="th">Price (€)</div>
+      <div class="th">1st address</div>
+      <div class="th">2nd address</div>
+      <div class="th">Extra info</div>
+      <div class="th">Update</div>
+    </div>
+    {% for part in parts %}
+    <form class="tr" method="POST" id="part{{ forloop.counter }}">
+      {% csrf_token %}
+      <input type="hidden" name="orig_partno" value="{{ part.partno }}" />
+      <div class="td" data-label="Partno">
+        {% if part.partno %}
+        <span class="toggle">
+          {{ part.partno }}
+        </span>
+        <input class="d-none toggle" type="text" name="partno" value="{{ part.partno }}" />
+        {% else %}
+        <span class="toggle">
+          &nbsp;
+        </span>
+        <input class="d-none toggle" type="text" name="partno" value="" />
+        {% endif %}
+      </div>
+      <div class="td" data-label="Description">
+        {% if part.description %}
+        <span class="toggle">
+          {{ part.description }}
+        </span>
+        <input class="d-none toggle" type="text" name="description" value="{{ part.description }}" />
+        {% else %}
+        <span class="toggle">
+          &nbsp;
+        </span>
+        <input class="d-none toggle" type="text" name="description" value="" />
+        {% endif %}
+      </div>
+      <div class="td" data-label="Location">
+        {% if part.location %}
+        <span class="toggle">
+          {{ part.location }}
+        </span>
+        <input class="d-none toggle" type="text" name="location" value="{{ part.location }}" />
+        {% else %}
+        <span class="toggle">
+          &nbsp;
+        </span>
+        <input class="d-none toggle" type="text" name="location" value="" />
+        {% endif %}
+      </div>
+      <div class="td" data-label="Shelf">
+        {% if part.shelf %}
+        <span class="toggle">
+          {{ part.shelf }}
+        </span>
+        <input class="d-none toggle" type="text" name="shelf" value="{{ part.shelf }}" />
+        {% else %}
+        <span class="toggle">
+          &nbsp;
+        </span>
+        <input class="d-none toggle" type="text" name="shelf" value="" />
+        {% endif %}
+      </div>
+      <div class="td" data-label="Group">
+        {% if part.group %}
+        <span class="toggle">
+          {{ part.group }}
+        </span>
+        <input class="d-none toggle" type="text" name="group" value="{{ part.group }}" />
+        {% else %}
+        <span class="toggle">
+          &nbsp;
+        </span>
+        <input class="d-none toggle" type="text" name="group" value="" />
+        {% endif %}
+      </div>
+      <div class="td" data-label="Total">
+        <span class="toggle">
+          {{ part.total }}
+        </span>
+        <input class="d-none toggle" type="text" name="total" value="{{ part.total }}" />
+      </div>
+      <div class="td" data-label="Price (€)">
+        {% if part.price %}
+        <span class="toggle">
+          {{ part.price }}
+        </span>
+        <input class="d-none toggle" type="text" name="price" value="{{ part.price }}" />
+        {% else %}
+        <span class="toggle">
+          &nbsp;
+        </span>
+        <input class="d-none toggle" type="text" name="price" value="" />
+        {% endif %}
+      </div>
+      <div class="td" data-label="1st Address">
+        {% if part.primary_order_address %}
+        <span class="toggle">
+          {{ part.primary_order_address }}
+        </span>
+        <input class="d-none toggle" type="text" name="primary_order_address" value="{{ part.primary_order_address }}" />
+        {% else %}
+        <span class="toggle">
+          &nbsp;
+        </span>
+        <input class="d-none toggle" type="text" name="primary_order_address" value="" />
+        {% endif %}
+      </div>
+      <div class="td" data-label="2nd Address">
+        {% if part.secondary_order_address %}
+        <span class="toggle">
+          {{ part.secondary_order_address }}
+        </span>
+        <input class="d-none toggle" type="text" name="secondary_order_address" value="{{ part.secondary_order_address }}" />
+        {% else %}
+        <span class="toggle">
+          &nbsp;
+        </span>
+        <input class="d-none toggle" type="text" name="secondary_order_address" value="" />
+        {% endif %}
+      </div>
+      <div class="td" data-label="Extra Info">
+        {% if part.extra_info %}
+        <span class="toggle">
+          {{ part.extra_info }}
+        </span>
+        <input class="d-none toggle" type="text" name="extra_info" value="{{ part.extra_info }}" />
+        {% else %}
+        <span class="toggle">
+          &nbsp;
+        </span>
+        <input class="d-none toggle" type="text" name="extra_info" value="" />
+        {% endif %}
+      </div>
+      <div class="td" data-label="Update">
+        <div class="toggle">
+          <button class="ajax" data-dump="#main" data-url="/plus/" formaction="/plus/" type="submit">
+            <i class="fas fa-plus"></i>
+          </button>
+          <button class="ajax" data-dump="#main" data-url="/minus/" formaction="/minus/" type="submit">
+            <i class="fas fa-minus"></i>
+          </button>
+          <button class="edit" type="button">
+            <i class="fas fa-edit"></i>
+          </button>
+          <button class="ajax" data-dump="#main" data-url="/delete/" formaction="/delete/" type="submit">
+            <i class="fas fa-trash-alt"></i>
+          </button>
+        </div>
+        <div class="d-none toggle">
+          <button class="ajax" data-dump="#main" data-url="/edit/" formaction="/edit/" type="submit">
+            <i class="fas fa-save"></i>
+          </button>
+          <button class="edit" type="button">
+            <i class="fas fa-undo-alt"></i>
+          </button>
+        </div>
+    </form>
+  </div>
+  </form>
+  {% endfor %}
+</div>
+{% endif %}
 </div>
