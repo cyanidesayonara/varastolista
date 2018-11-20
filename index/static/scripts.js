@@ -10,20 +10,17 @@ function closeModal() {
   modal.innerHTML = "";
   modal.style.display = "";
 };
-function toggleModal() {
-  $("#modal").toggle();
-};
 function pushState(url) {
   // return if url in urls
-  var urls = ["new", "plus", "minus", "edit", "delete"];
-  for (var i = 0; i < urls.length; i++) {
+  const urls = ["new", "plus", "minus", "edit", "delete"];
+  for (const i = 0; i < urls.length; i++) {
     if (url.includes(urls[i])) {
       return;
     }
   }  
-  var main = $("#main");
-  var context = main[0].innerHTML;
-  var state = {
+  const main = $("#main");
+  const context = main[0].innerHTML;
+  const state = {
     "context": context,
     "url": url,
   };
@@ -31,15 +28,15 @@ function pushState(url) {
 };
 function replaceState(url) {
   // return if url in urls
-  var urls = ["new", "plus", "minus", "edit", "delete"];
+  const urls = ["new", "plus", "minus", "edit", "delete"];
   for (var i = 0; i < urls.length; i++) {
     if (url.includes(urls[i])) {
       return;
     }
   }  
-  var main = $("#main");
-  var context = main[0].innerHTML;
-  var state = {
+  const main = $("#main");
+  const context = main[0].innerHTML;
+  const state = {
     "context": context,
     "url": url,
   };
@@ -89,30 +86,29 @@ $(document)
   })
   .on("click", ".ajax", function (e) {
     e.preventDefault();
-    var button = $(this);
-    var url = button.data("url");
-    var dump = button.data("dump");
-    var form = button.parents("form");
+    const button = $(this);
+    let url = button.data("url");
+    const dump = button.data("dump");
+    const form = button.parents("form");
     if (form.length) {
-      var method = form.attr("method");
-      var q = form.children("#q").val();
+      const method = form.attr("method");
+      let q = form.children("#q").val();
       if (method == "GET") {
         if (q) {
           pushState(url);
           q = cleanString(q);
-          console.log(q)
           url = url + "?q=" + q;
-          var data = undefined;
+          const data = undefined;
         } else {
           return;
         }
       } else {
-        var data = form.serialize();
+        const data = form.serialize();
       }
     } else {
       pushState(url);
-      var method = "GET";
-      var data = undefined;
+      const method = "GET";
+      const data = undefined;
     }
     if (dump == "#modal") {
       openModal();
@@ -144,7 +140,7 @@ $(document)
 
 $(window)
   .on("popstate", function (e) {
-    var state = e.originalEvent.state;
+    const state = e.originalEvent.state;
     if (state) {
       $("#main").html(state.context);
     }
