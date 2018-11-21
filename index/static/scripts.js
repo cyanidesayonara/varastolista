@@ -13,7 +13,7 @@ function closeModal() {
 function pushState(url) {
   // return if url in urls
   const urls = ["new", "plus", "minus", "edit", "delete"];
-  for (const i = 0; i < urls.length; i++) {
+  for (let i = 0; i < urls.length; i++) {
     if (url.includes(urls[i])) {
       return;
     }
@@ -29,7 +29,7 @@ function pushState(url) {
 function replaceState(url) {
   // return if url in urls
   const urls = ["new", "plus", "minus", "edit", "delete"];
-  for (var i = 0; i < urls.length; i++) {
+  for (let i = 0; i < urls.length; i++) {
     if (url.includes(urls[i])) {
       return;
     }
@@ -87,28 +87,32 @@ $(document)
   .on("click", ".ajax", function (e) {
     e.preventDefault();
     const button = $(this);
-    let url = button.data("url");
     const dump = button.data("dump");
     const form = button.parents("form");
+    let url = button.data("url");
+    let method;
+    let data;
     if (form.length) {
-      const method = form.attr("method");
+      console.log(form.attr("method"))
+      method = form.attr("method");
       let q = form.children("#q").val();
       if (method == "GET") {
         if (q) {
           pushState(url);
           q = cleanString(q);
           url = url + "?q=" + q;
-          const data = undefined;
+          data = undefined;
         } else {
           return;
         }
       } else {
-        const data = form.serialize();
+        data = form.serialize();
       }
-    } else {
+    }
+    else {
       pushState(url);
-      const method = "GET";
-      const data = undefined;
+      method = "GET";
+      data = undefined;
     }
     if (dump == "#modal") {
       openModal();
