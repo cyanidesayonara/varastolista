@@ -44,6 +44,7 @@ footer {
   bottom: 0;
   left: 0;
   right: 0;
+  z-index: -1;
 }
 #content {
   min-height: 100vh;
@@ -66,6 +67,7 @@ footer {
   float: right;
 }
 .table {
+  position: relative;
   display: table;
   table-layout: fixed;
   border-collapse: collapse;
@@ -78,6 +80,10 @@ footer {
   display: table-row;
   vertical-align: middle;
   border-bottom: 1px solid black;
+}
+.tr:not(:first-of-type):hover,
+.tr.toggled {
+  background: #ddd;
 }
 .th,
 .td {
@@ -93,7 +99,7 @@ footer {
   width: 175px;
 }
 .d-none {
-  display: none;
+  display: none!important;
 }
 #modal {
   display: none;
@@ -104,17 +110,21 @@ footer {
   right: 0;
   background: rgba(50,50,50,.5);
 }
-#modal video {
-  position: absolute;
+#modal > * {
+  text-align: unset;
+  position: fixed;
   left: 50%;
   top: 250px;
+  min-width: 200px;
   max-width: 80%;
-  transform: translate(-50%, -50%) scaleX(-1)!important;
+  transform: translate(-50%, -50%)!important;
+  border: 2px solid white;
+  border-radius: .25rem;
+  background: #ddd;
+  padding: 5px;
 }
-canvas.drawing, canvas.drawingBuffer {
-    position: absolute;
-    left: 0;
-    top: 0;
+.hilite {
+  background: rgba(18, 52, 86, .5);
 }
 
 @media screen and (max-width: 767px) {

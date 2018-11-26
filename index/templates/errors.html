@@ -1,0 +1,24 @@
+<div id="errors">
+  {% if mod_part %}
+    Partno: {{ mod_part.partno }}
+  {% endif %}
+  {% for field, errors in errors %}
+    <p>
+      {{ field|capfirst }}:
+      {% for error in errors %}
+        {{ error }}
+      {% endfor %}
+    </p>
+  {% endfor %}
+  {% if message %}
+    <p>
+      {{ message }}
+    </p>
+  {% endif %}
+  <button type="button" title="Close" onclick="closeModal()">
+    <span>
+      Close
+      <i class="fas fa-times"></i>
+    </span>
+  </button>
+</div>

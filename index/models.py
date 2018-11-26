@@ -1,5 +1,7 @@
 from django.db import models
 from django.utils import timezone
+from django.db.models import Q
+from django.db import transaction
 
 # Create your models here.
 class Part(models.Model):
@@ -12,7 +14,7 @@ class Part(models.Model):
     shelf = models.CharField(max_length=20, blank=True, null=True)
     group = models.CharField(max_length=20, blank=True, null=True)
     price = models.DecimalField(
-        default=0, max_digits=9, decimal_places=2, blank=True, null=True)
+        default=0, max_digits=10, decimal_places=2, blank=True, null=True)
     extra_info = models.CharField(max_length=500, blank=True, null=True)
     primary_order_address = models.EmailField(
         max_length=100, blank=True, null=True)
@@ -20,17 +22,23 @@ class Part(models.Model):
         max_length=100, blank=True, null=True)
 
     class Meta:
-        ordering = ("partno",)
+        ordering = ("-created_at",)
 
-    def update(self):
-        self.updated_at = timezone.now()
-        self.save()
-
+    @transaction.atomic
     def plus(self):
         self.updated_at = timezone.now()
         self.total = self.total + 1
+        self.save()
 
+    @transaction.atomic
     def minus(self):
         if self.total > 0:
             self.updated_at = timezone.now()
             self.total = self.total - 1
+            self.save()
+
+    def search(q):
+        return Part.objects.filter(Q(partno__icontains=q) |
+                                    Q(shelf__icontains=q) |
+                                    Q(group__icontains=q) |
+                                    Q(description__icontains=q))

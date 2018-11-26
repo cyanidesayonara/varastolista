@@ -1,8 +1,5 @@
-function openModal(el, id) {
-  el = document.createElement(el);
-  el.id = id;
+function openModal() {
   let modal = document.getElementById("modal");
-  modal.appendChild(el);
   modal.style.display = "block";
 };
 function closeModal() {
@@ -50,7 +47,10 @@ function cleanString(q) {
   return q.toLowerCase();
 };
 function initScanner() {
-  openModal("video", "scanner");
+  let el = document.createElement("video");
+  el.id = "scanner";
+  document.getElementById("modal").appendChild(el);
+  openModal();
   let scanner = new Instascan.Scanner({
     video: document.getElementById("scanner")
   });
@@ -61,11 +61,15 @@ function initScanner() {
   });
   Instascan.Camera.getCameras().then(function (cameras) {
     if (cameras.length > 0) {
-      scanner.start(cameras[0]);
+      if (cameras[1]) {
+        scanner.start(cameras[1]);
+      } else {
+        scanner.start(cameras[0]); 
+      }
       $("#modal").click(function () {
         scanner.stop();
         closeModal();
-      })
+      });
     } else {
       console.error("No cameras found.");
       closeModal();
@@ -93,7 +97,6 @@ $(document)
     let method;
     let data;
     if (form.length) {
-      console.log(form.attr("method"))
       method = form.attr("method");
       let q = form.children("#q").val();
       if (method == "GET") {
@@ -114,9 +117,6 @@ $(document)
       method = "GET";
       data = undefined;
     }
-    if (dump == "#modal") {
-      openModal();
-    }
     $.ajax({
       type: method,
       url: url,
@@ -128,18 +128,38 @@ $(document)
       .done(function(response) {
         $(dump).html(response);
         replaceState(url);
+        if (document.getElementById("errors")) {
+          openModal();
+        }
       });
   })
-  .on("click", ".edit", function (e) {
+  .on("click", ".new", function (e) {
     e.preventDefault();
-    let row = $(this).parents(".tr");
-    row.addClass("toggled")
-      .find(".toggle")
-      .toggleClass("d-none");
-    row.siblings(".toggled")
+    $("#part0")
+      .toggleClass("toggled d-none")
+      .siblings(".toggled")
       .removeClass("toggled")
       .find(".toggle")
       .toggleClass("d-none");
+  })
+  .on("click", ".edit", function (e) {
+    e.preventDefault();
+    $("#part0.toggled")
+      .toggleClass("toggled d-none")
+    $(this)
+      .parents(".tr")
+      .siblings(".toggled")
+      .removeClass("toggled")
+      .find(".toggle")
+      .toggleClass("d-none");
+    $(this)
+      .parents(".tr")
+      .toggleClass("toggled")
+      .find(".toggle")
+      .toggleClass("d-none");
+  })
+  .on("click", "#modal", function () {
+    closeModal();
   });
 
 $(window)

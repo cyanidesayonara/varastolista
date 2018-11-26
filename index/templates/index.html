@@ -8,4 +8,9 @@
   {% else %}
     {% include "login.html" %}
   {% endif %}
+  <div id="modal">
+    {% if errors or message %}
+      {% include "errors.html" %}
+    {% endif %}
+  </div>
 {% endblock %}
