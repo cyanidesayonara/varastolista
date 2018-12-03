@@ -62,9 +62,17 @@ footer {
 }
 #topbar {
   overflow: auto;
+  text-align: left;
 }
 #topbar > * {
+  display: inline-block;
+}
+#topbar > *:first-child {
   float: right;
+}
+input[type="file"] {
+  width: 250px;
+  margin: 0;
 }
 .table {
   position: relative;
@@ -94,6 +102,7 @@ footer {
 }
 .td input {
   width: 100%;
+  margin: 0;
 }
 .th:last-child {
   width: 175px;
@@ -108,7 +117,7 @@ footer {
   bottom: 0;
   left: 0;
   right: 0;
-  background: rgba(50,50,50,.5);
+  background: rgba(50,50,50,.75);
 }
 #modal > * {
   text-align: unset;
@@ -123,8 +132,24 @@ footer {
   background: #ddd;
   padding: 5px;
 }
-.hilite {
-  background: rgba(18, 52, 86, .5);
+.modified {
+  -webkit-animation: fadeOut 10s ease backwards; 
+  animation: fadeOut 10s ease backwards;
+}
+.alarm {
+  background: rgba(221, 21, 21, 0.5)!important;
+}
+
+@-webkit-keyframes fadeOut {
+  0% {  background: rgba(10, 240, 48, 0.5); }
+  95% { background: rgba(10, 240, 48, 0.5); }
+  100% { background: rgba(10, 240, 48, 0); }
+}
+
+@keyframes fadeOut {
+  0% {  background: rgba(10, 240, 48, 0.5); }
+  95% { background: rgba(10, 240, 48, 0.5); }
+  100% { background: rgba(10, 240, 48, 0); }
 }
 
 @media screen and (max-width: 767px) {

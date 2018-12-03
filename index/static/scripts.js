@@ -1,6 +1,5 @@
 function openModal() {
-  let modal = document.getElementById("modal");
-  modal.style.display = "block";
+  document.getElementById("modal").style.display = "block";
 };
 function closeModal() {
   let modal = document.getElementById("modal");
@@ -9,7 +8,7 @@ function closeModal() {
 };
 function pushState(url) {
   // return if url in urls
-  const urls = ["new", "plus", "minus", "edit", "delete"];
+  const urls = ["new", "plus", "minus", "edit", "delete", "upload"];
   for (let i = 0; i < urls.length; i++) {
     if (url.includes(urls[i])) {
       return;
@@ -25,7 +24,7 @@ function pushState(url) {
 };
 function replaceState(url) {
   // return if url in urls
-  const urls = ["new", "plus", "minus", "edit", "delete"];
+  const urls = ["new", "plus", "minus", "edit", "delete", "upload"];
   for (let i = 0; i < urls.length; i++) {
     if (url.includes(urls[i])) {
       return;

@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
+from django.http import HttpResponse
+import tablib
+from .resources import PartResource
 from .models import Part
 from .forms import PartForm
 
@@ -15,7 +18,7 @@ def index(request):
                 "parts": Part.objects.all(),
             })
         return render(request, template, context)
-
+    
 def login_view(request):
     if request.method == "POST":
         username = request.POST.get("username")
@@ -189,3 +192,49 @@ def delete(request):
                 "parts": Part.objects.all(),
             })
         return render(request, template, context)
+
+@login_required
+def upload(request):
+    if request.method == "POST":
+        part_resource = PartResource()
+        dataset = tablib.Dataset()
+        if request.FILES:
+            parts = request.FILES["parts"]
+
+            try:
+                imported_data = dataset.load(parts.read())
+                result = part_resource.import_data(
+                    dataset, dry_run=True)  # Test the data import
+
+                if not result.has_errors():
+                    part_resource.import_data(
+                        dataset, dry_run=False)  # Actually import now
+                    message = "Parts imported"
+                else:
+                    message = "Couldn't import file"
+            except tablib.core.UnsupportedFormat:
+                message = "Unsupported format"
+        else:
+            message = "No file found"
+
+        template = "index.html"
+        context = {}
+        user = request.user
+        if user.is_authenticated:
+            context.update({
+                "message": message,
+                "parts": Part.objects.all(),
+            })
+        return render(request, template, context)
+    else:
+        return redirect("/")
+
+@login_required
+def download(request):
+    if request.method == "GET":
+        part_resource = PartResource()
+        dataset = part_resource.export()
+        response = HttpResponse(
+            dataset.xls, content_type='application/vnd.ms-excel')
+        response['Content-Disposition'] = 'attachment; filename="parts.xls"'
+        return response

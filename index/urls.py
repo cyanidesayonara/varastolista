@@ -12,4 +12,6 @@ urlpatterns = [
     path("minus/", views.minus, name="minus"),
     path("edit/", views.edit, name="edit"),
     path("delete/", views.delete, name="delete"),
+    path("upload/", views.upload, name="upload"),
+    path("download/", views.download, name="download"),
 ]

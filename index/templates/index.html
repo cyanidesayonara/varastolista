@@ -11,6 +11,9 @@
   <div id="modal">
     {% if errors or message %}
       {% include "errors.html" %}
+      <script>
+        document.getElementById("modal").style.display = "block";
+      </script>
     {% endif %}
   </div>
 {% endblock %}

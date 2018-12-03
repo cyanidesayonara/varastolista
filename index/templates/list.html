@@ -21,6 +21,7 @@
       <div class="th">Shelf</div>
       <div class="th">Group</div>
       <div class="th">Total</div>
+      <div class="th">Alarm</div>
       <div class="th">Price (€)</div>
       <div class="th">1st address</div>
       <div class="th">2nd address</div>
@@ -47,6 +48,9 @@
       <div class="td" data-label="Total">
         <input type="text" name="total" value="0" />
       </div>
+      <div class="td" data-label="Alarm">
+        <input type="text" name="alarm" />
+      </div>      
       <div class="td" data-label="Price (€)">
         <input type="text" name="price" value="0.0" />
       </div>
@@ -69,7 +73,7 @@
       </div>
     </form>
     {% for part in parts %}
-    <form class="tr{% if part.id == mod_part.id %} hilite{% endif %}" method="POST" id="part{{ forloop.counter }}">
+    <form class="tr{% if part.total <= part.alarm  %} alarm{% elif part.id == mod_part.id %} modified{% endif %}" method="POST" id="part{{ forloop.counter }}">
       {% csrf_token %}
       {% if q %}
       <input type="hidden" name="q" value="{{ q }}" />
@@ -146,6 +150,19 @@
         </span>
         <input class="d-none toggle" type="text" name="total" value="{{ part.total }}" />
       </div>
+      <div class="td" data-label="Alarm" >
+        {% if part.alarm %}
+          <span class="toggle">
+            {{ part.alarm }}
+          </span>      
+          <input class="d-none toggle" type="text" name="alarm" value="{{ part.alarm }}" />
+        {% else %}
+          <span class="toggle">
+            &nbsp;
+          </span>      
+          <input class="d-none toggle" type="text" name="alarm" />
+        {% endif %}
+      </div>      
       <div class="td" data-label="Price (€)">
         {% if part.price %}
         <span class="toggle">

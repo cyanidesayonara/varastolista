@@ -9,6 +9,7 @@ class Part(models.Model):
     updated_at = models.DateTimeField(auto_now_add=True)
     partno = models.CharField(max_length=100, unique=True)
     total = models.IntegerField(default=0)
+    alarm = models.IntegerField(blank=True, null=True)
     description = models.CharField(max_length=500, blank=True, null=True)
     location = models.CharField(max_length=100, blank=True, null=True)
     shelf = models.CharField(max_length=20, blank=True, null=True)
