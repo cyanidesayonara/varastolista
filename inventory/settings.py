@@ -15,6 +15,11 @@ import os
 import django_heroku
 import local_settings
 
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 IMPORT_EXPORT_USE_TRANSACTIONS = True
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
