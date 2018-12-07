@@ -151,7 +151,7 @@
         <input class="d-none toggle" type="text" name="total" value="{{ part.total }}" />
       </div>
       <div class="td" data-label="Alarm" >
-        {% if part.alarm %}
+        {% if part.alarm != None %}
           <span class="toggle">
             {{ part.alarm }}
           </span>      
