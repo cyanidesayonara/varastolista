@@ -1,3 +1,5 @@
+import os
+import django_heroku
 import dj_database_url
 from django.utils.translation import ugettext_lazy as _
 
@@ -13,14 +15,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
-import os
-import django_heroku
-import local_settings
-
-""" SECURE_SSL_REDIRECT = True
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https') """
+SECURE_SSL_REDIRECT = os.environ.get('SECURE_SSL_REDIRECT', False)
+SESSION_COOKIE_SECURE = os.environ.get('SESSION_COOKIE_SECURE', False)
+CSRF_COOKIE_SECURE = os.environ.get('CSRF_COOKIE_SECURE', False)
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'http')
 
 IMPORT_EXPORT_USE_TRANSACTIONS = True
 
@@ -32,10 +30,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = local_settings.SECRET_KEY
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', "qwerty")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DJANGO_SECRET_KEY', True)
 
 ALLOWED_HOSTS = []
 
