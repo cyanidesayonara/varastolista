@@ -2,11 +2,14 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
+from django.utils.translation import ugettext as _
+from django.utils import translation
 import tablib
 from .resources import PartResource
 from .models import Part
 from .forms import PartForm
+
 
 def index(request):
     if request.method == "GET":
@@ -18,6 +21,15 @@ def index(request):
                 "parts": Part.objects.all(),
             })
         return render(request, template, context)
+
+def language(request):
+    languages = ["en", "fi"]
+    if request.method == "POST":
+        language = request.POST.get("language")
+        if language and language in languages:
+            translation.activate(language)
+            request.session[translation.LANGUAGE_SESSION_KEY] = language
+    return redirect("/")
     
 def login_view(request):
     if request.method == "POST":
@@ -49,6 +61,8 @@ def search(request):
                 "parts": Part.objects.all(),
             })
         return render(request, template, context)
+    else:
+        raise Http404
 
 @login_required
 def new(request):
@@ -58,9 +72,10 @@ def new(request):
         form = PartForm(request.POST)
         if form.is_valid():
             part, created = Part.objects.get_or_create(**form.cleaned_data)
+            message = _("Part added")
             context.update({
                 "mod_part": part,
-                "message": "Added",
+                "message": message,
             })
         else:
             context.update({
@@ -70,6 +85,8 @@ def new(request):
             "parts": Part.objects.all(),
         })
         return render(request, template, context)
+    else:
+        raise Http404
 
 @login_required
 def plus(request):
@@ -82,8 +99,9 @@ def plus(request):
                 part = Part.objects.get(partno=partno)
                 part.plus()
                 part.save()
+                message = _("Added (+1)")
                 context.update({
-                    "message": "+1",
+                    "message": message,
                     "mod_part": part,
                 })
             except Part.DoesNotExist:
@@ -99,6 +117,8 @@ def plus(request):
                 "parts": Part.objects.all(),
             })
         return render(request, template, context)
+    else:
+        raise Http404
 
 @login_required
 def minus(request):
@@ -111,8 +131,9 @@ def minus(request):
                 part = Part.objects.get(partno=partno)
                 part.minus()
                 part.save()
+                message = _("Subtracted (-1)")
                 context.update({
-                    "message": "-1",
+                    "message": message,
                     "mod_part": part,
                 })
             except Part.DoesNotExist:
@@ -128,6 +149,8 @@ def minus(request):
                 "parts": Part.objects.all(),
             })
         return render(request, template, context)
+    else:
+        raise Http404
 
 @login_required
 def edit(request):
@@ -141,8 +164,9 @@ def edit(request):
                 form = PartForm(request.POST, instance=part)
                 if form.is_valid():
                     form.save()
+                    message = _("Saved")
                     context.update({
-                        "message": "Saved!",
+                        "message": message,
                     })
                 else:
                     context.update({
@@ -164,6 +188,8 @@ def edit(request):
                 "parts": Part.objects.all(),
             })
         return render(request, template, context)
+    else:
+        raise Http404
 
 @login_required
 def delete(request):
@@ -175,8 +201,9 @@ def delete(request):
             try:
                 part = Part.objects.get(partno=partno)
                 part.delete()
+                message = _("Delete")
                 context.update({
-                    "message": "Deleted!",
+                    "message": message,
                     "mod_part": part,
                 })
             except Part.DoesNotExist:
@@ -192,6 +219,8 @@ def delete(request):
                 "parts": Part.objects.all(),
             })
         return render(request, template, context)
+    else:
+        raise Http404
 
 @login_required
 def upload(request):
@@ -209,13 +238,13 @@ def upload(request):
                 if not result.has_errors():
                     part_resource.import_data(
                         dataset, dry_run=False)  # Actually import now
-                    message = "Parts imported"
+                    message = _("Parts imported")
                 else:
-                    message = "Couldn't import file"
+                    message = _("Couldn't import file")
             except tablib.core.UnsupportedFormat:
-                message = "Unsupported format"
+                message = _("Unsupported format")
         else:
-            message = "No file found"
+            message = _("No file found")
 
         template = "index.html"
         context = {}
@@ -238,3 +267,5 @@ def download(request):
             dataset.xls, content_type='application/vnd.ms-excel')
         response['Content-Disposition'] = 'attachment; filename="parts.xls"'
         return response
+    else:
+        raise Http404

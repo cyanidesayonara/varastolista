@@ -1,4 +1,6 @@
 import dj_database_url
+from django.utils.translation import ugettext_lazy as _
+
 """
 Django settings for inventory project.
 
@@ -15,10 +17,10 @@ import os
 import django_heroku
 import local_settings
 
-SECURE_SSL_REDIRECT = True
+""" SECURE_SSL_REDIRECT = True
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https') """
 
 IMPORT_EXPORT_USE_TRANSACTIONS = True
 
@@ -54,12 +56,27 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    'django.middleware.locale.LocaleMiddleware',
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
+# Provide a lists of languages which your site supports.
+LANGUAGES = (
+    ('en', _('English')),
+    ('fi', _('Finland')),
+)
+
+# Set the default language for your site.
+LANGUAGE_CODE = 'en'
+
+# Tell Django where the project's translation files should be.
+LOCALE_PATHS = (
+    os.path.join(BASE_DIR, 'locale'),
+)
 
 ROOT_URLCONF = "inventory.urls"
 

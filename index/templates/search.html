@@ -1,20 +1,22 @@
+{% load i18n %}
+
 <div id="search">
   <h2>
-    Search for part
+    {% trans "Search for part" %}
   </h2>
   <form method="GET">
     <label>
-      Part number/shelf/group/description
+    {% trans "Part number/shelf/group/description" %}
     </label>
     <br>
     <input id="q" type="text" name="q">
     <br>
     <button class="ajax" data-dump="#main" data-url="/search/" formaction="/search/" type="submit">
-      Search
+      {% trans "Search" %}    
       <i class="fas fa-search"></i>
     </button>
     <button type="button" id="scanneron">
-      Read QR-code
+      {% trans "Read QR-code" %}
       <i class="fas fa-qrcode"></i>
     </button>
   </form>

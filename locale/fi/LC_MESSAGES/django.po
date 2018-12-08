@@ -1,0 +1,199 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-12-08 18:33+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\index\templates\errors.html:5 .\index\templates\list.html:20
+#: .\index\templates\list.html:35 .\index\templates\list.html:84
+msgid "Partno"
+msgstr "Osanro"
+
+#: .\index\templates\errors.html:22
+msgid "Close"
+msgstr "Sulje"
+
+#: .\index\templates\list.html:8
+msgid "Show All"
+msgstr "Näytä kaikki"
+
+#: .\index\templates\list.html:15
+msgid "Add new part"
+msgstr "Lisää uusi osa"
+
+#: .\index\templates\list.html:21 .\index\templates\list.html:38
+#: .\index\templates\list.html:97
+msgid "Description"
+msgstr "Kuvaus"
+
+#: .\index\templates\list.html:22 .\index\templates\list.html:41
+#: .\index\templates\list.html:110
+msgid "Location"
+msgstr "Sijainti"
+
+#: .\index\templates\list.html:23 .\index\templates\list.html:44
+#: .\index\templates\list.html:123
+msgid "Shelf"
+msgstr "Hylly"
+
+#: .\index\templates\list.html:24 .\index\templates\list.html:47
+#: .\index\templates\list.html:136
+msgid "Group"
+msgstr "Ryhmä"
+
+#: .\index\templates\list.html:25 .\index\templates\list.html:50
+#: .\index\templates\list.html:149
+msgid "Total"
+msgstr "Kpl"
+
+#: .\index\templates\list.html:26 .\index\templates\list.html:53
+#: .\index\templates\list.html:155
+msgid "Alarm"
+msgstr "Häly"
+
+#: .\index\templates\list.html:27 .\index\templates\list.html:56
+#: .\index\templates\list.html:168
+msgid "Price"
+msgstr "Hinta"
+
+#: .\index\templates\list.html:28 .\index\templates\list.html:59
+#: .\index\templates\list.html:181
+msgid "1st Address"
+msgstr "1. Tilausosoite"
+
+#: .\index\templates\list.html:29 .\index\templates\list.html:62
+#: .\index\templates\list.html:194
+msgid "2nd Address"
+msgstr "2. Tilausosoite"
+
+#: .\index\templates\list.html:30 .\index\templates\list.html:65
+#: .\index\templates\list.html:207
+msgid "Extra Info"
+msgstr "Lisätieto"
+
+#: .\index\templates\list.html:31 .\index\templates\list.html:68
+#: .\index\templates\list.html:220
+msgid "Update"
+msgstr "Päivitä"
+
+#: .\index\templates\list.html:69 .\index\templates\list.html:222
+msgid "Save"
+msgstr "Tallenna"
+
+#: .\index\templates\list.html:72 .\index\templates\list.html:225
+msgid "Undo"
+msgstr "Takaisin"
+
+#: .\index\templates\list.html:230
+msgid "Add"
+msgstr "Lisää"
+
+#: .\index\templates\list.html:233
+msgid "Subtract"
+msgstr "Vähennä"
+
+#: .\index\templates\list.html:236
+msgid "Edit"
+msgstr "Muokkaa"
+
+#: .\index\templates\list.html:239 .\index\views.py:204
+msgid "Delete"
+msgstr "Poista"
+
+#: .\index\templates\login.html:5 .\index\templates\login.html:22
+msgid "Login"
+msgstr "Kirjaudu"
+
+#: .\index\templates\login.html:10
+msgid "Username"
+msgstr "Käyttäjänimi"
+
+#: .\index\templates\login.html:16
+msgid "Password"
+msgstr "Salasana"
+
+#: .\index\templates\search.html:5
+msgid "Search for part"
+msgstr "Hae osia"
+
+#: .\index\templates\search.html:9
+msgid "Part number/shelf/group/description"
+msgstr "Osanro/hylly/ryhmä/kuvaus"
+
+#: .\index\templates\search.html:15
+msgid "Search"
+msgstr "Hae"
+
+#: .\index\templates\search.html:19
+msgid "Read QR-code"
+msgstr "Lue QR-koodi"
+
+#: .\index\templates\topbar.html:7
+msgid "Logout"
+msgstr "Kirjaudu ulos"
+
+#: .\index\templates\topbar.html:15
+msgid "Upload Excel"
+msgstr "Upload Excel"
+
+#: .\index\templates\topbar.html:20
+msgid "Download Excel"
+msgstr "Download Excel"
+
+#: .\index\templates\topbar.html:37 .\index\templates\topbar.html:38
+msgid "Change Language"
+msgstr "Vaihda kieltä"
+
+#: .\index\views.py:75
+msgid "Part added"
+msgstr "Osa lisätty"
+
+#: .\index\views.py:102
+msgid "Added (+1)"
+msgstr "Lisätty (+1)"
+
+#: .\index\views.py:134
+msgid "Subtracted (-1)"
+msgstr "Vähennetty (-1)"
+
+#: .\index\views.py:167
+msgid "Saved"
+msgstr "Tallennettu"
+
+#: .\index\views.py:241
+msgid "Parts imported"
+msgstr "Osat importattu"
+
+#: .\index\views.py:243
+msgid "Couldn't import file"
+msgstr "Tiedoston importaus epäonnistui"
+
+#: .\index\views.py:245
+msgid "Unsupported format"
+msgstr "Formaatti ei ole tuettu"
+
+#: .\index\views.py:247
+msgid "No file found"
+msgstr "Tiedostoa ei löytynyt"
+
+#: .\inventory\settings.py:69
+msgid "English"
+msgstr "Englanti"
+
+#: .\inventory\settings.py:70
+msgid "Finland"
+msgstr "Suomi"

@@ -1,6 +1,8 @@
+{% load i18n %}
+
 <div id="errors">
   {% if mod_part %}
-    Partno: {{ mod_part.partno }}
+    {% trans "Partno" %}: {{ mod_part.partno }}
   {% endif %}
   {% for field, errors in errors %}
     <p>
@@ -17,7 +19,7 @@
   {% endif %}
   <button type="button" title="Close" onclick="closeModal()">
     <span>
-      Close
+      {% trans "Close" %}
       <i class="fas fa-times"></i>
     </span>
   </button>

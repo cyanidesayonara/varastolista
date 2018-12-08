@@ -1,8 +1,8 @@
 {% extends request.is_ajax|yesno:"ajax.html,base.html" %}
 
 {% block main %}
+  {% include "topbar.html" %}
   {% if user.is_authenticated %}
-    {% include "topbar.html" %}
     {% include "search.html" %}
     {% include "list.html" %}
   {% else %}

@@ -8,7 +8,7 @@ function closeModal() {
 };
 function pushState(url) {
   // return if url in urls
-  const urls = ["new", "plus", "minus", "edit", "delete", "upload"];
+  const urls = ["new", "plus", "minus", "edit", "delete", "upload", "language"];
   for (let i = 0; i < urls.length; i++) {
     if (url.includes(urls[i])) {
       return;
@@ -24,7 +24,7 @@ function pushState(url) {
 };
 function replaceState(url) {
   // return if url in urls
-  const urls = ["new", "plus", "minus", "edit", "delete", "upload"];
+  const urls = ["new", "plus", "minus", "edit", "delete", "upload", "language"];
   for (let i = 0; i < urls.length; i++) {
     if (url.includes(urls[i])) {
       return;
@@ -87,9 +87,35 @@ $(document)
     e.preventDefault();
     initScanner();
   })
+  .on("change", ".dropdown", function (e) {
+    e.preventDefault();
+    const button = $(this);
+    console.log(button)
+    const dump = button.data("dump");
+    const form = button.parents("form");
+    const url = button.data("url");
+    const method = form.attr("method");
+    const data = form.serialize();
+    $.ajax({
+      type: method,
+      url: url,
+      data: data,
+    })
+      .fail(function (xhr, ajaxOptions, thrownError) {
+        console.log(thrownError);
+      })
+      .done(function (response) {
+        $(dump).html(response);
+        replaceState(url);
+        if (document.getElementById("errors")) {
+          openModal();
+        }
+      });    
+  })
   .on("click", ".ajax", function (e) {
     e.preventDefault();
     const button = $(this);
+    console.log(button)
     const dump = button.data("dump");
     const form = button.parents("form");
     let url = button.data("url");
