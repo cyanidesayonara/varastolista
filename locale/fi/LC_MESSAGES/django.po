@@ -162,7 +162,7 @@ msgstr "Download Excel"
 
 #: .\index\templates\topbar.html:31
 msgid "Signup"
-msgstr "Kirjaudu sisään"
+msgstr "Rekisteröidy"
 
 #: .\index\templates\topbar.html:47 .\index\templates\topbar.html:48
 msgid "Change Language"

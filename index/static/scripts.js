@@ -90,7 +90,6 @@ $(document)
   .on("change", ".dropdown", function (e) {
     e.preventDefault();
     const button = $(this);
-    console.log(button)
     const dump = button.data("dump");
     const form = button.parents("form");
     const url = button.data("url");
@@ -102,7 +101,7 @@ $(document)
       data: data,
     })
       .fail(function (xhr, ajaxOptions, thrownError) {
-        console.log(thrownError);
+        console.error(thrownError);
       })
       .done(function (response) {
         $(dump).html(response);
@@ -141,7 +140,6 @@ $(document)
         price = price.replace(",", ".");
         form.find("[name=price]").val(price)
         data = form.serialize();
-        console.log(data);
       }
     }
     else {
@@ -155,7 +153,7 @@ $(document)
       data: data,
     })
       .fail(function(xhr, ajaxOptions, thrownError) {
-        console.log(thrownError);
+        console.error(thrownError);
       })
       .done(function(response) {
         $(dump).html(response);
