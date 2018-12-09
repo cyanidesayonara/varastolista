@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-08 18:33+0200\n"
+"POT-Creation-Date: 2018-12-09 21:16+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: .\index\templates\errors.html:5 .\index\templates\list.html:20
-#: .\index\templates\list.html:35 .\index\templates\list.html:84
+#: .\index\templates\list.html:35 .\index\templates\list.html:85
 msgid "Partno"
 msgstr "Osanro"
 
@@ -36,81 +36,87 @@ msgid "Add new part"
 msgstr "Lisää uusi osa"
 
 #: .\index\templates\list.html:21 .\index\templates\list.html:38
-#: .\index\templates\list.html:97
+#: .\index\templates\list.html:98
 msgid "Description"
 msgstr "Kuvaus"
 
 #: .\index\templates\list.html:22 .\index\templates\list.html:41
-#: .\index\templates\list.html:110
+#: .\index\templates\list.html:111
 msgid "Location"
 msgstr "Sijainti"
 
 #: .\index\templates\list.html:23 .\index\templates\list.html:44
-#: .\index\templates\list.html:123
+#: .\index\templates\list.html:124
 msgid "Shelf"
 msgstr "Hylly"
 
 #: .\index\templates\list.html:24 .\index\templates\list.html:47
-#: .\index\templates\list.html:136
+#: .\index\templates\list.html:137
 msgid "Group"
 msgstr "Ryhmä"
 
 #: .\index\templates\list.html:25 .\index\templates\list.html:50
-#: .\index\templates\list.html:149
+#: .\index\templates\list.html:150
 msgid "Total"
 msgstr "Kpl"
 
 #: .\index\templates\list.html:26 .\index\templates\list.html:53
-#: .\index\templates\list.html:155
+#: .\index\templates\list.html:156
 msgid "Alarm"
 msgstr "Häly"
 
 #: .\index\templates\list.html:27 .\index\templates\list.html:56
-#: .\index\templates\list.html:168
+#: .\index\templates\list.html:169
 msgid "Price"
 msgstr "Hinta"
 
 #: .\index\templates\list.html:28 .\index\templates\list.html:59
-#: .\index\templates\list.html:181
+#: .\index\templates\list.html:182
 msgid "1st Address"
 msgstr "1. Tilausosoite"
 
 #: .\index\templates\list.html:29 .\index\templates\list.html:62
-#: .\index\templates\list.html:194
+#: .\index\templates\list.html:195
 msgid "2nd Address"
 msgstr "2. Tilausosoite"
 
 #: .\index\templates\list.html:30 .\index\templates\list.html:65
-#: .\index\templates\list.html:207
+#: .\index\templates\list.html:208
 msgid "Extra Info"
 msgstr "Lisätieto"
 
 #: .\index\templates\list.html:31 .\index\templates\list.html:68
-#: .\index\templates\list.html:220
+#: .\index\templates\list.html:221
 msgid "Update"
 msgstr "Päivitä"
 
-#: .\index\templates\list.html:69 .\index\templates\list.html:222
+#: .\index\templates\list.html:69 .\index\templates\list.html:223
 msgid "Save"
 msgstr "Tallenna"
 
-#: .\index\templates\list.html:72 .\index\templates\list.html:225
+#: .\index\templates\list.html:72 .\index\templates\list.html:226
+#: .\index\templates\list.html:249
 msgid "Undo"
 msgstr "Takaisin"
 
-#: .\index\templates\list.html:230
+#: .\index\templates\list.html:229 .\index\templates\list.html:252
+msgid "Confirm?"
+msgstr "Vahvista?"
+
+#: .\index\templates\list.html:232
 msgid "Add"
 msgstr "Lisää"
 
-#: .\index\templates\list.html:233
+#: .\index\templates\list.html:235
 msgid "Subtract"
 msgstr "Vähennä"
 
-#: .\index\templates\list.html:236
+#: .\index\templates\list.html:238
 msgid "Edit"
 msgstr "Muokkaa"
 
-#: .\index\templates\list.html:239 .\index\views.py:204
+#: .\index\templates\list.html:241 .\index\templates\list.html:246
+#: .\index\views.py:204
 msgid "Delete"
 msgstr "Poista"
 
@@ -127,7 +133,7 @@ msgid "Password"
 msgstr "Salasana"
 
 #: .\index\templates\search.html:5
-msgid "Search for part"
+msgid "Search for parts"
 msgstr "Hae osia"
 
 #: .\index\templates\search.html:9
@@ -142,19 +148,23 @@ msgstr "Hae"
 msgid "Read QR-code"
 msgstr "Lue QR-koodi"
 
-#: .\index\templates\topbar.html:7
+#: .\index\templates\topbar.html:8
 msgid "Logout"
 msgstr "Kirjaudu ulos"
 
-#: .\index\templates\topbar.html:15
+#: .\index\templates\topbar.html:21
 msgid "Upload Excel"
 msgstr "Upload Excel"
 
-#: .\index\templates\topbar.html:20
+#: .\index\templates\topbar.html:26
 msgid "Download Excel"
 msgstr "Download Excel"
 
-#: .\index\templates\topbar.html:37 .\index\templates\topbar.html:38
+#: .\index\templates\topbar.html:31
+msgid "Signup"
+msgstr "Kirjaudu sisään"
+
+#: .\index\templates\topbar.html:47 .\index\templates\topbar.html:48
 msgid "Change Language"
 msgstr "Vaihda kieltä"
 
@@ -190,10 +200,10 @@ msgstr "Formaatti ei ole tuettu"
 msgid "No file found"
 msgstr "Tiedostoa ei löytynyt"
 
-#: .\inventory\settings.py:69
+#: .\inventory\settings.py:67
 msgid "English"
 msgstr "Englanti"
 
-#: .\inventory\settings.py:70
+#: .\inventory\settings.py:68
 msgid "Finland"
 msgstr "Suomi"

@@ -9,18 +9,26 @@
       <i class="fas fa-sign-out-alt"></i>
     </button>
   </form>
-  <form method="POST" action="/upload/" data-dump="#main" data-url="/upload/" enctype="multipart/form-data">
-    {% csrf_token %}
-    <input type="file" name="parts">
-    <button type="submit" type="submit">
-      {% trans "Upload Excel" %}
-    </button>
-  </form>
-  <form method="GET" action="/download/" enctype="multipart/form-data">
-    <button type="submit">
-      {% trans "Download Excel" %}
-    </button>
-  </form>
+  <button class="excel">
+    Excel
+    <i class="far fa-file-excel"></i>
+  </button>
+  <div class="excel d-none">
+    <form method="POST" action="/upload/" data-dump="#main" data-url="/upload/" enctype="multipart/form-data">
+      {% csrf_token %}
+      <input type="file" name="parts">
+      <button type="submit" type="submit">
+        {% trans "Upload Excel" %}
+      </button>
+    </form>
+    <form method="GET" action="/download/" enctype="multipart/form-data">
+      <button type="submit">
+        {% trans "Download Excel" %}
+      </button>
+    </form>
+  </div>
+  {% else %}
+  <button>{% trans "Signup" %}</button>
   {% endif %}
   <form method="POST" action="{% url 'language' %}">
     {% csrf_token %}

@@ -112,6 +112,10 @@ $(document)
         }
       });    
   })
+  .on("click", ".excel", function (e) {
+    e.preventDefault();
+    $(this).siblings(".excel").toggleClass("d-none");
+  })
   .on("click", ".ajax", function (e) {
     e.preventDefault();
     const button = $(this);

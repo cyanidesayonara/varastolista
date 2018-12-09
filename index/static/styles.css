@@ -5,7 +5,7 @@ html {
   box-sizing: inherit;
 }
 body {
-  background: rgb(240, 240, 240);
+  background: rgba(255, 216, 155, .3);
   font-family: 'K2D', sans-serif;
   position: relative;
   text-align: center;
@@ -32,23 +32,26 @@ button {
 }
 nav {
   box-shadow: rgba(150, 150, 150) 0 0 10px;
-  background: rgb(18, 52, 86);
+  background: #19547b;
 }
 nav h1 a {
   color: #fff;
 }
 footer {
   box-shadow: rgba(150, 150, 150) 0 0 10px;
-  background: rgb(200, 200, 200);
+  background: #19547b;
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
   z-index: -1;
 }
+form {
+  display: inline-block;
+}
 #content {
   min-height: 100vh;
-  padding-bottom: 170px;
+  padding-bottom: 50px;
 }
 #content > * {
   overflow: hidden;
@@ -91,7 +94,7 @@ input[type="file"] {
 }
 .tr:not(:first-of-type):hover,
 .tr.toggled {
-  background: #ddd;
+  background: rgba(50,50,50,.1);
 }
 .th,
 .td {
@@ -109,6 +112,9 @@ input[type="file"] {
 }
 .d-none {
   display: none!important;
+}
+.hilite {
+  background: rgba(50,50,50,.1);
 }
 #modal {
   display: none;
@@ -129,7 +135,8 @@ input[type="file"] {
   transform: translate(-50%, -50%)!important;
   border: 2px solid white;
   border-radius: .25rem;
-  background: #ddd;
+  background: rgba(250, 250, 250, .8);
+  ;
   padding: 5px;
 }
 .modified {
