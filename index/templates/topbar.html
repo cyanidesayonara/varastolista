@@ -28,7 +28,7 @@
     </form>
   </div>
   {% else %}
-  <button>{% trans "Signup" %}</button>
+  <button class="d-none">{% trans "Signup" %}</button>
   {% endif %}
   <form method="POST" action="{% url 'language' %}">
     {% csrf_token %}
