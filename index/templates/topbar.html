@@ -1,6 +1,7 @@
 {% load i18n %}
 
 <div id="topbar">
+  {% if user.is_authenticated %}
   <form action="/logout/" method="POST">
     {% csrf_token %}
     <button type="submit">
@@ -17,21 +18,22 @@
   </form>
   <form method="GET" action="/download/" enctype="multipart/form-data">
     <button type="submit">
-    {% trans "Download Excel" %}
+      {% trans "Download Excel" %}
     </button>
   </form>
+  {% endif %}
   <form method="POST" action="{% url 'language' %}">
     {% csrf_token %}
     <input name="next" type="hidden" value="{{ redirect_to }}">
     <select class="dropdown" name="language" data-dump="#main" data-url="{% url 'language' %}">
-        {% get_current_language as LANGUAGE_CODE %}
-        {% get_available_languages as LANGUAGES %}
-        {% get_language_info_list for LANGUAGES as languages %}
-        {% for language in languages %}
-            <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
-                {{ language.name_local|capfirst }} ({{ language.code }})
-            </option>
-        {% endfor %}
+      {% get_current_language as LANGUAGE_CODE %}
+      {% get_available_languages as LANGUAGES %}
+      {% get_language_info_list for LANGUAGES as languages %}
+      {% for language in languages %}
+      <option value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+        {{ language.name_local|capfirst }} ({{ language.code }})
+      </option>
+      {% endfor %}
     </select>
     <noscript>
       <button formaction="{% url 'language' %}" type="submit" title="{% trans 'Change Language' %}">
