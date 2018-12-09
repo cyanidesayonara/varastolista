@@ -115,7 +115,6 @@ $(document)
   .on("click", ".ajax", function (e) {
     e.preventDefault();
     const button = $(this);
-    console.log(button)
     const dump = button.data("dump");
     const form = button.parents("form");
     let url = button.data("url");
@@ -134,7 +133,11 @@ $(document)
           return;
         }
       } else {
+        let price = form.find("[name=price]").val();
+        price = price.replace(",", ".");
+        form.find("[name=price]").val(price)
         data = form.serialize();
+        console.log(data);
       }
     }
     else {
@@ -164,8 +167,8 @@ $(document)
       .toggleClass("toggled d-none")
       .siblings(".toggled")
       .removeClass("toggled")
-      .find(".toggle")
-      .toggleClass("d-none");
+      .find(".toggled")
+      .toggleClass("d-none toggled");
   })
   .on("click", ".edit", function (e) {
     e.preventDefault();
@@ -175,13 +178,29 @@ $(document)
       .parents(".tr")
       .siblings(".toggled")
       .removeClass("toggled")
-      .find(".toggle")
-      .toggleClass("d-none");
+      .find(".toggled")
+      .toggleClass("d-none toggled");
     $(this)
       .parents(".tr")
       .toggleClass("toggled")
-      .find(".toggle")
-      .toggleClass("d-none");
+      .find(".toggle, .edit-toggle")
+      .toggleClass("d-none toggled");
+  })
+  .on("click", ".remove", function (e) {
+    e.preventDefault();
+    $("#part0.toggled")
+      .toggleClass("toggled d-none")
+    $(this)
+      .parents(".tr")
+      .siblings(".toggled")
+      .removeClass("toggled")
+      .find(".toggled")
+      .toggleClass("d-none toggled");
+    $(this)
+      .parents(".tr")
+      .toggleClass("toggled")
+      .find(".remove-toggle")
+      .toggleClass("d-none toggled");
   })
   .on("click", "#modal", function () {
     closeModal();
