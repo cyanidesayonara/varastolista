@@ -54,7 +54,6 @@ form {
   padding-bottom: 50px;
 }
 #content > * {
-  position: relative;
   overflow: hidden;
   width: 100%;
   padding: 30px 3%;
