@@ -9,11 +9,11 @@
       <i class="fas fa-sign-out-alt"></i>
     </button>
   </form>
-  <button class="excel">
+  <button class="excel-button">
     Excel
     <i class="far fa-file-excel"></i>
   </button>
-  <div class="excel d-none">
+  <div class="excel-show d-none">
     <form method="POST" action="/upload/" data-dump="#main" data-url="/upload/" enctype="multipart/form-data">
       {% csrf_token %}
       <input type="file" name="parts">

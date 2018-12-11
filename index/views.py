@@ -38,17 +38,14 @@ def login_view(request):
         username = request.POST.get("username")
         password = request.POST.get("password")
         user = authenticate(username=username, password=password)
-        if user is not None:
-            login(request, user)
-            context.update({
-                "parts": Part.objects.all(),
-            })
-        else:
+        if user is None:
             message = _("Incorrect username and/or password")
             context.update({
                 "message": message,
             })
-        return render(request, template, context)
+            return render(request, template, context)
+        else:
+            login(request, user)
     return redirect("/")
 
 def logout_view(request):

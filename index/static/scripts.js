@@ -111,9 +111,9 @@ $(document)
         }
       });    
   })
-  .on("click", ".excel", function (e) {
+  .on("click", ".excel-button", function (e) {
     e.preventDefault();
-    $(this).siblings(".excel").toggleClass("d-none");
+    $(this).siblings(".excel-show").toggleClass("d-none");
   })
   .on("click", ".ajax", function (e) {
     e.preventDefault();
