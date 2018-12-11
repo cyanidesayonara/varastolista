@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-09 21:16+0200\n"
+"POT-Creation-Date: 2018-12-11 11:01+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -116,7 +116,7 @@ msgid "Edit"
 msgstr "Muokkaa"
 
 #: .\index\templates\list.html:241 .\index\templates\list.html:246
-#: .\index\views.py:204
+#: .\index\views.py:215
 msgid "Delete"
 msgstr "Poista"
 
@@ -168,35 +168,39 @@ msgstr "Rekisteröidy"
 msgid "Change Language"
 msgstr "Vaihda kieltä"
 
-#: .\index\views.py:75
+#: .\index\views.py:47
+msgid "Incorrect username and/or password"
+msgstr "Väärä käyttäjänimi ja/tai salasana"
+
+#: .\index\views.py:86
 msgid "Part added"
 msgstr "Osa lisätty"
 
-#: .\index\views.py:102
+#: .\index\views.py:113
 msgid "Added (+1)"
 msgstr "Lisätty (+1)"
 
-#: .\index\views.py:134
+#: .\index\views.py:145
 msgid "Subtracted (-1)"
 msgstr "Vähennetty (-1)"
 
-#: .\index\views.py:167
+#: .\index\views.py:178
 msgid "Saved"
 msgstr "Tallennettu"
 
-#: .\index\views.py:241
+#: .\index\views.py:252
 msgid "Parts imported"
 msgstr "Osat importattu"
 
-#: .\index\views.py:243
+#: .\index\views.py:254
 msgid "Couldn't import file"
 msgstr "Tiedoston importaus epäonnistui"
 
-#: .\index\views.py:245
+#: .\index\views.py:256
 msgid "Unsupported format"
 msgstr "Formaatti ei ole tuettu"
 
-#: .\index\views.py:247
+#: .\index\views.py:258
 msgid "No file found"
 msgstr "Tiedostoa ei löytynyt"
 

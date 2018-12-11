@@ -33,11 +33,22 @@ def language(request):
     
 def login_view(request):
     if request.method == "POST":
+        template = "index.html"
+        context = {}
         username = request.POST.get("username")
         password = request.POST.get("password")
         user = authenticate(username=username, password=password)
         if user is not None:
             login(request, user)
+            context.update({
+                "parts": Part.objects.all(),
+            })
+        else:
+            message = _("Incorrect username and/or password")
+            context.update({
+                "message": message,
+            })
+        return render(request, template, context)
     return redirect("/")
 
 def logout_view(request):
