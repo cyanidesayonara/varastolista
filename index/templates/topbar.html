@@ -19,11 +19,13 @@
       <input type="file" name="parts">
       <button type="submit" type="submit">
         {% trans "Upload Excel" %}
+        <i class="fas fa-file-upload"></i>
       </button>
     </form>
     <form method="GET" action="/download/" enctype="multipart/form-data">
       <button type="submit">
         {% trans "Download Excel" %}
+        <i class="fas fa-file-download"></i>
       </button>
     </form>
   </div>
