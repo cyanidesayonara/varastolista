@@ -19,7 +19,9 @@ a {
 p {
   margin: 10px 0;
 }
-button {
+button,
+select,
+input[type="file"] {
   font-weight: 600;
   cursor: pointer;
 }
