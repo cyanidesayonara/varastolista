@@ -206,6 +206,9 @@ $(document)
   })
   .on("click", "#modal", function () {
     closeModal();
+  })
+  .on("click", ".loader", function () {
+    $(this).children().toggleClass("d-none");
   });
 
 $(window)

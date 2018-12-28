@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-11 11:01+0200\n"
+"POT-Creation-Date: 2018-12-28 21:16+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,8 +18,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\index\templates\errors.html:5 .\index\templates\list.html:20
-#: .\index\templates\list.html:35 .\index\templates\list.html:85
+#: .\index\templates\errors.html:5 .\index\templates\list.html:23
+#: .\index\templates\list.html:38 .\index\templates\list.html:89
 msgid "Partno"
 msgstr "Osanro"
 
@@ -27,96 +27,105 @@ msgstr "Osanro"
 msgid "Close"
 msgstr "Sulje"
 
+#: .\index\templates\list.html:7
+msgid "result"
+msgid_plural "results"
+msgstr[0] "tulos"
+msgstr[1] "tulosta"
+
 #: .\index\templates\list.html:8
+msgid "for"
+msgstr "haulla"
+
+#: .\index\templates\list.html:12
 msgid "Show All"
 msgstr "Näytä kaikki"
 
-#: .\index\templates\list.html:15
+#: .\index\templates\list.html:18
 msgid "Add new part"
 msgstr "Lisää uusi osa"
 
-#: .\index\templates\list.html:21 .\index\templates\list.html:38
-#: .\index\templates\list.html:98
+#: .\index\templates\list.html:24 .\index\templates\list.html:41
+#: .\index\templates\list.html:102
 msgid "Description"
 msgstr "Kuvaus"
 
-#: .\index\templates\list.html:22 .\index\templates\list.html:41
-#: .\index\templates\list.html:111
+#: .\index\templates\list.html:25 .\index\templates\list.html:44
+#: .\index\templates\list.html:115
 msgid "Location"
 msgstr "Sijainti"
 
-#: .\index\templates\list.html:23 .\index\templates\list.html:44
-#: .\index\templates\list.html:124
+#: .\index\templates\list.html:26 .\index\templates\list.html:47
+#: .\index\templates\list.html:128
 msgid "Shelf"
 msgstr "Hylly"
 
-#: .\index\templates\list.html:24 .\index\templates\list.html:47
-#: .\index\templates\list.html:137
+#: .\index\templates\list.html:27 .\index\templates\list.html:50
+#: .\index\templates\list.html:141
 msgid "Group"
 msgstr "Ryhmä"
 
-#: .\index\templates\list.html:25 .\index\templates\list.html:50
-#: .\index\templates\list.html:150
+#: .\index\templates\list.html:28 .\index\templates\list.html:53
+#: .\index\templates\list.html:154
 msgid "Total"
 msgstr "Kpl"
 
-#: .\index\templates\list.html:26 .\index\templates\list.html:53
-#: .\index\templates\list.html:156
+#: .\index\templates\list.html:29 .\index\templates\list.html:56
+#: .\index\templates\list.html:160
 msgid "Alarm"
 msgstr "Häly"
 
-#: .\index\templates\list.html:27 .\index\templates\list.html:56
-#: .\index\templates\list.html:169
+#: .\index\templates\list.html:30 .\index\templates\list.html:59
+#: .\index\templates\list.html:173
 msgid "Price"
 msgstr "Hinta"
 
-#: .\index\templates\list.html:28 .\index\templates\list.html:59
-#: .\index\templates\list.html:182
+#: .\index\templates\list.html:31 .\index\templates\list.html:62
+#: .\index\templates\list.html:186
 msgid "1st Address"
 msgstr "1. Tilausosoite"
 
-#: .\index\templates\list.html:29 .\index\templates\list.html:62
-#: .\index\templates\list.html:195
+#: .\index\templates\list.html:32 .\index\templates\list.html:65
+#: .\index\templates\list.html:199
 msgid "2nd Address"
 msgstr "2. Tilausosoite"
 
-#: .\index\templates\list.html:30 .\index\templates\list.html:65
-#: .\index\templates\list.html:208
+#: .\index\templates\list.html:33 .\index\templates\list.html:68
+#: .\index\templates\list.html:212
 msgid "Extra Info"
 msgstr "Lisätieto"
 
-#: .\index\templates\list.html:31 .\index\templates\list.html:68
-#: .\index\templates\list.html:221
+#: .\index\templates\list.html:34 .\index\templates\list.html:71
+#: .\index\templates\list.html:225
 msgid "Update"
 msgstr "Päivitä"
 
-#: .\index\templates\list.html:69 .\index\templates\list.html:223
+#: .\index\templates\list.html:72 .\index\templates\list.html:227
 msgid "Save"
 msgstr "Tallenna"
 
-#: .\index\templates\list.html:72 .\index\templates\list.html:226
-#: .\index\templates\list.html:249
+#: .\index\templates\list.html:76 .\index\templates\list.html:231
+#: .\index\templates\list.html:261
 msgid "Undo"
 msgstr "Takaisin"
 
-#: .\index\templates\list.html:229 .\index\templates\list.html:252
+#: .\index\templates\list.html:236 .\index\templates\list.html:266
 msgid "Confirm?"
 msgstr "Vahvista?"
 
-#: .\index\templates\list.html:232
+#: .\index\templates\list.html:241
 msgid "Add"
 msgstr "Lisää"
 
-#: .\index\templates\list.html:235
+#: .\index\templates\list.html:245
 msgid "Subtract"
 msgstr "Vähennä"
 
-#: .\index\templates\list.html:238
+#: .\index\templates\list.html:249
 msgid "Edit"
 msgstr "Muokkaa"
 
-#: .\index\templates\list.html:241 .\index\templates\list.html:246
-#: .\index\views.py:215
+#: .\index\templates\list.html:252 .\index\templates\list.html:257
 msgid "Delete"
 msgstr "Poista"
 
@@ -156,51 +165,115 @@ msgstr "Kirjaudu ulos"
 msgid "Upload Excel"
 msgstr "Upload Excel"
 
-#: .\index\templates\topbar.html:26
+#: .\index\templates\topbar.html:27
 msgid "Download Excel"
 msgstr "Download Excel"
 
-#: .\index\templates\topbar.html:31
+#: .\index\templates\topbar.html:33
 msgid "Signup"
 msgstr "Rekisteröidy"
 
-#: .\index\templates\topbar.html:47 .\index\templates\topbar.html:48
+#: .\index\templates\topbar.html:49 .\index\templates\topbar.html:50
 msgid "Change Language"
 msgstr "Vaihda kieltä"
 
-#: .\index\views.py:47
+#: .\index\views.py:15
+msgid "Inventory alarm for part number "
+msgstr "Hälytysraja rikki osalla "
+
+#: .\index\views.py:16
+msgid "Inventory total of part number "
+msgstr "Osan numero "
+
+#: .\index\views.py:17
+msgid " has reached its alarm limit of "
+msgstr " kappalemäärä on saavuttanut hälytysrajan "
+
+#: .\index\views.py:19
+msgid "Details: "
+msgstr "Tiedot: "
+
+#: .\index\views.py:20
+msgid "Partno: "
+msgstr "Osanro: "
+
+#: .\index\views.py:22
+msgid "Description: "
+msgstr "Kuvaus: "
+
+#: .\index\views.py:24
+msgid "Location: "
+msgstr "Sijainti: "
+
+#: .\index\views.py:26
+msgid "Shelf: "
+msgstr "Hylly: "
+
+#: .\index\views.py:28
+msgid "Group: "
+msgstr "Ryhmä: "
+
+#: .\index\views.py:29
+msgid "Total: "
+msgstr "Kpl: "
+
+#: .\index\views.py:30
+msgid "Alarm: "
+msgstr "Häly: "
+
+#: .\index\views.py:32
+msgid "Price (€): "
+msgstr "Hinta (€): "
+
+#: .\index\views.py:34
+msgid "1st Address: "
+msgstr "1. Tilausosoite: "
+
+#: .\index\views.py:36
+msgid "2nd Address: "
+msgstr "2. Tilausosoite: "
+
+#: .\index\views.py:38
+msgid "Extra Info: "
+msgstr "Lisätieto: "
+
+#: .\index\views.py:70
 msgid "Incorrect username and/or password"
 msgstr "Väärä käyttäjänimi ja/tai salasana"
 
-#: .\index\views.py:86
+#: .\index\views.py:111
 msgid "Part added"
 msgstr "Osa lisätty"
 
-#: .\index\views.py:113
+#: .\index\views.py:138
 msgid "Added (+1)"
 msgstr "Lisätty (+1)"
 
-#: .\index\views.py:145
+#: .\index\views.py:171
 msgid "Subtracted (-1)"
 msgstr "Vähennetty (-1)"
 
-#: .\index\views.py:178
+#: .\index\views.py:209
 msgid "Saved"
 msgstr "Tallennettu"
 
-#: .\index\views.py:252
+#: .\index\views.py:250
+msgid "Deleted"
+msgstr "Poistettu"
+
+#: .\index\views.py:287
 msgid "Parts imported"
 msgstr "Osat importattu"
 
-#: .\index\views.py:254
+#: .\index\views.py:289
 msgid "Couldn't import file"
 msgstr "Tiedoston importaus epäonnistui"
 
-#: .\index\views.py:256
+#: .\index\views.py:291
 msgid "Unsupported format"
 msgstr "Formaatti ei ole tuettu"
 
-#: .\index\views.py:258
+#: .\index\views.py:293
 msgid "No file found"
 msgstr "Tiedostoa ei löytynyt"
 

@@ -15,10 +15,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
-SECURE_SSL_REDIRECT = os.environ.get('SECURE_SSL_REDIRECT', False)
-SESSION_COOKIE_SECURE = os.environ.get('SESSION_COOKIE_SECURE', False)
-CSRF_COOKIE_SECURE = os.environ.get('CSRF_COOKIE_SECURE', False)
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'http')
+SECURE_SSL_REDIRECT = os.environ.get("SECURE_SSL_REDIRECT", False)
+SESSION_COOKIE_SECURE = os.environ.get("SESSION_COOKIE_SECURE", False)
+CSRF_COOKIE_SECURE = os.environ.get("CSRF_COOKIE_SECURE", False)
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "http")
 
 IMPORT_EXPORT_USE_TRANSACTIONS = True
 
@@ -30,10 +30,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', "qwerty")
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "qwerty")
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DJANGO_SECRET_KEY', True)
+# SECURITY WARNING: don"t run with debug turned on in production!
+DEBUG = os.environ.get("DJANGO_SECRET_KEY", True)
 
 ALLOWED_HOSTS = []
 
@@ -54,7 +54,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
-    'django.middleware.locale.LocaleMiddleware',
+    "django.middleware.locale.LocaleMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -64,16 +64,16 @@ MIDDLEWARE = [
 
 # Provide a lists of languages which your site supports.
 LANGUAGES = (
-    ('en', _('English')),
-    ('fi', _('Finland')),
+    ("en", _("English")),
+    ("fi", _("Finland")),
 )
 
 # Set the default language for your site.
-LANGUAGE_CODE = 'en'
+LANGUAGE_CODE = "en"
 
 # Tell Django where the project's translation files should be.
 LOCALE_PATHS = (
-    os.path.join(BASE_DIR, 'locale'),
+    os.path.join(BASE_DIR, "locale"),
 )
 
 ROOT_URLCONF = "inventory.urls"
@@ -107,9 +107,9 @@ DATABASES = {
     }
 }
 
-if DEBUG == False and os.environ['DATABASE_URL']:
-    DATABASES['default'] = dj_database_url.config(
-        default=os.environ['DATABASE_URL'],
+if DEBUG == False and os.environ["DATABASE_URL"]:
+    DATABASES["default"] = dj_database_url.config(
+        default=os.environ["DATABASE_URL"],
         conn_max_age=600, ssl_require=True)
 
 # Password validation
@@ -142,7 +142,15 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 STATIC_URL = "/static/"
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST_USER = "sateilytekniikanvarastolista"
+EMAIL_HOST_PASSWORD = "slamdancelowpostgokart"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = "sateilytekniikanvarastolista@gmail.com"
 
 django_heroku.settings(locals())

@@ -5,11 +5,39 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse, Http404
 from django.utils.translation import ugettext as _
 from django.utils import translation
+from django.core.mail import EmailMessage
 import tablib
 from .resources import PartResource
 from .models import Part
 from .forms import PartForm
 
+def send_alarm_mail(user, part):
+    title = _("Inventory alarm for part number ") + part.partno
+    body = _("Inventory total of part number ") + part.partno + \
+        _(" has reached its alarm limit of ") + str(part.alarm) + "."
+    body = body + "\n\n"
+    body = body + _("Details: ") + "\n"
+    body = body + _("Partno: ") + part.partno + "\n"
+    if part.description:
+        body = body + _("Description: ") + part.description + "\n"
+    if part.location:
+        body = body + _("Location: ") + part.location + "\n"
+    if part.shelf:
+        body = body + _("Shelf: ") + part.shelf + "\n"
+    if part.group:
+        body = body + _("Group: ") + part.group + "\n"
+    body = body + _("Total: ") + str(part.total) + "\n"
+    body = body + _("Alarm: ") + str(part.alarm) + "\n"
+    if part.price:
+        body = body + _("Price (€): ") + str(part.price) + "\n"
+    if part.primary_order_address:
+        body = body + _("1st Address: ") + part.primary_order_address + "\n"
+    if part.secondary_order_address:
+        body = body + _("2nd Address: ") + part.secondary_order_address + "\n"
+    if part.extra_info:
+        body = body + _("Extra Info: ") + part.extra_info + "\n"
+    email = EmailMessage(title, body, to=[user.email, 'cyanidesayonara@gmail.com'])
+    email.send()
 
 def index(request):
     if request.method == "GET":
@@ -137,13 +165,19 @@ def minus(request):
         if partno:
             try:
                 part = Part.objects.get(partno=partno)
-                part.minus()
-                part.save()
-                message = _("Subtracted (-1)")
-                context.update({
-                    "message": message,
-                    "mod_part": part,
-                })
+                if part.total > 0:
+                    old_total = part.total
+                    part.minus()
+                    message = _("Subtracted (-1)")
+                    # if total was previously more than alarm and is now less
+                    if part.alarm:
+                        if old_total > part.alarm:
+                            if part.total <= part.alarm:
+                                send_alarm_mail(request.user, part)
+                    context.update({
+                        "message": message,
+                        "mod_part": part,
+                    })
             except Part.DoesNotExist:
                 pass
         q = request.POST.get("q")
@@ -169,10 +203,16 @@ def edit(request):
         if partno:
             try:
                 part = Part.objects.get(partno=partno)
+                old_total = part.total
                 form = PartForm(request.POST, instance=part)
                 if form.is_valid():
                     form.save()
                     message = _("Saved")
+                    # if total was previously more than alarm and is now less
+                    if part.alarm:
+                        if old_total > part.alarm:
+                            if part.total <= part.alarm:
+                                send_alarm_mail(request.user, part)
                     context.update({
                         "message": message,
                     })
@@ -209,7 +249,7 @@ def delete(request):
             try:
                 part = Part.objects.get(partno=partno)
                 part.delete()
-                message = _("Delete")
+                message = _("Deleted")
                 context.update({
                     "message": message,
                     "mod_part": part,
