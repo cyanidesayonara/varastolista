@@ -15,6 +15,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
+# pip upgrade line for windows: for /F "delims===" %i in ('pip freeze -l') do pip install -U %i
+
 SECURE_SSL_REDIRECT = os.environ.get("SECURE_SSL_REDIRECT", False)
 SESSION_COOKIE_SECURE = os.environ.get("SESSION_COOKIE_SECURE", False)
 CSRF_COOKIE_SECURE = os.environ.get("CSRF_COOKIE_SECURE", False)
