@@ -171,6 +171,7 @@ $(document)
       .removeClass("toggled")
       .find(".toggled")
       .toggleClass("d-none toggled");
+    $("#empty").toggleClass("d-none");
   })
   .on("click", ".edit", function (e) {
     e.preventDefault();

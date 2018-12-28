@@ -11,8 +11,12 @@ from .resources import PartResource
 from .models import Part
 from .forms import PartForm
 
+
 def send_alarm_mail(user, part):
-    title = _("Inventory alarm for part number ") + part.partno
+    stvl_emailees = ['cyanidesayonara@gmail.com', 'santtu.nykanen@gmail.com']
+
+    title = _("Part number ") + part.partno + _(" is running out")
+    
     body = _("Inventory total of part number ") + part.partno + \
         _(" has reached its alarm limit of ") + str(part.alarm) + "."
     body = body + "\n\n"
@@ -36,7 +40,8 @@ def send_alarm_mail(user, part):
         body = body + _("2nd Address: ") + part.secondary_order_address + "\n"
     if part.extra_info:
         body = body + _("Extra Info: ") + part.extra_info + "\n"
-    email = EmailMessage(title, body, to=[user.email, 'cyanidesayonara@gmail.com'])
+    body = body + "\nhttps://stvl.herokuapp.com/search/?q=" + part.partno
+    email = EmailMessage(title, body, to=stvl_emailees)
     email.send()
 
 def index(request):
