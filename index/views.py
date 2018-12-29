@@ -1,3 +1,4 @@
+import os
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
@@ -11,9 +12,8 @@ from .resources import PartResource
 from .models import Part
 from .forms import PartForm
 
-
 def send_alarm_mail(user, part):
-    stvl_emailees = ['cyanidesayonara@gmail.com', 'santtu.nykanen@gmail.com']
+    stvl_emailees = os.environ.get("STVL_EMAILEES", "").split(" ")
 
     title = _("Part number ") + part.partno + _(" is running out")
     
@@ -41,6 +41,7 @@ def send_alarm_mail(user, part):
     if part.extra_info:
         body = body + _("Extra Info: ") + part.extra_info + "\n"
     body = body + "\nhttps://stvl.herokuapp.com/search/?q=" + part.partno
+
     email = EmailMessage(title, body, to=stvl_emailees)
     email.send()
 
