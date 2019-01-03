@@ -52,11 +52,11 @@ input[type="file"] {
   margin: 0;
   background: rgb(221,221,221)
 }
-nav {
+header {
   box-shadow: rgba(150, 150, 150) 0 0 10px;
   background: #19547b;
 }
-nav h1 a {
+header h1 a {
   color: #fff;
 }
 footer {
