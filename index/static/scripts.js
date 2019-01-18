@@ -14,8 +14,7 @@ function pushState(url) {
       return;
     }
   }  
-  const main = $("#main");
-  const context = main[0].innerHTML;
+  const context = document.getElementById("main").innerHTML;
   const state = {
     "context": context,
     "url": url,
@@ -30,8 +29,7 @@ function replaceState(url) {
       return;
     }
   }  
-  const main = $("#main");
-  const context = main[0].innerHTML;
+  const context = document.getElementById("main").innerHTML;
   const state = {
     "context": context,
     "url": url,

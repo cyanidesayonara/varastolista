@@ -20,7 +20,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 SECURE_SSL_REDIRECT = os.environ.get("SECURE_SSL_REDIRECT", False)
 SESSION_COOKIE_SECURE = os.environ.get("SESSION_COOKIE_SECURE", False)
 CSRF_COOKIE_SECURE = os.environ.get("CSRF_COOKIE_SECURE", False)
-SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "http")
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 IMPORT_EXPORT_USE_TRANSACTIONS = True
 
@@ -35,7 +35,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "qwerty")
 
 # SECURITY WARNING: don"t run with debug turned on in production!
-DEBUG = os.environ.get("DJANGO_SECRET_KEY", True)
+DEBUG = os.environ.get("DEBUG", True)
 
 ALLOWED_HOSTS = []
 
