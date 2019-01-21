@@ -19,7 +19,11 @@ function pushState(url) {
     "context": context,
     "url": url,
   };
-  history.pushState(state, "", url);
+  try {
+    history.pushState(state, "", url);
+  } catch (e) {
+    console.log("State is too big to save", context.length, e);
+  }
 };
 function replaceState(url) {
   // return if url in urls
@@ -34,7 +38,11 @@ function replaceState(url) {
     "context": context,
     "url": url,
   };
-  history.replaceState(state, "", url);
+  try {
+    history.replaceState(state, "", url);
+  } catch (e) {    
+    console.log("State is too big to save", context.length, e);
+  }
 };
 // replaces spaces/&s with +, removes unwanted chars
 function cleanString(q) {

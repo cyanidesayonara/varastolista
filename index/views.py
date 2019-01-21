@@ -47,7 +47,7 @@ def send_alarm_mail(user, part):
 
 def index(request):
     if request.method == "GET":
-        template = "index.html"
+        template = "index.min.html"
         context = {}
         user = request.user
         if user.is_authenticated:
@@ -67,7 +67,7 @@ def language(request):
     
 def login_view(request):
     if request.method == "POST":
-        template = "index.html"
+        template = "index.min.html"
         context = {}
         username = request.POST.get("username")
         password = request.POST.get("password")
@@ -90,7 +90,7 @@ def logout_view(request):
 @login_required
 def search(request):
     if request.method == "GET":
-        template = "index.html"
+        template = "index.min.html"
         context = {}
         q = request.GET.get("q")
         if (q):
@@ -109,7 +109,7 @@ def search(request):
 @login_required
 def new(request):
     if request.method == "POST":
-        template = "index.html"
+        template = "index.min.html"
         context = {}
         form = PartForm(request.POST)
         if form.is_valid():
@@ -133,7 +133,7 @@ def new(request):
 @login_required
 def plus(request):
     if request.method == "POST":
-        template = "index.html"
+        template = "index.min.html"
         context = {}
         partno = request.POST.get("partno")
         if partno:
@@ -165,7 +165,7 @@ def plus(request):
 @login_required
 def minus(request):
     if request.method == "POST":
-        template = "index.html"
+        template = "index.min.html"
         context = {}
         partno = request.POST.get("partno")
         if partno:
@@ -203,7 +203,7 @@ def minus(request):
 @login_required
 def edit(request):
     if request.method == "POST":
-        template = "index.html"
+        template = "index.min.html"
         context = {}
         partno = request.POST.get("orig_partno")
         if partno:
@@ -248,7 +248,7 @@ def edit(request):
 @login_required
 def delete(request):
     if request.method == "POST":
-        template = "index.html"
+        template = "index.min.html"
         context = {}
         partno = request.POST.get("partno")
         if partno:
@@ -300,7 +300,7 @@ def upload(request):
         else:
             message = _("No file found")
 
-        template = "index.html"
+        template = "index.min.html"
         context = {}
         user = request.user
         if user.is_authenticated:

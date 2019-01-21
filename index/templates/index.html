@@ -1,16 +1,16 @@
-{% extends request.is_ajax|yesno:"ajax.html,base.html" %}
+{% extends request.is_ajax|yesno:"ajax.min.html,base.min.html" %}
 
 {% block main %}
   {% include "topbar.html" %}
   {% if user.is_authenticated %}
-    {% include "search.html" %}
-    {% include "list.html" %}
+    {% include "search.min.html" %}
+    {% include "list.min.html" %}
   {% else %}
-    {% include "login.html" %}
+    {% include "login.min.html" %}
   {% endif %}
   <div id="modal">
     {% if errors or message %}
-      {% include "errors.html" %}
+      {% include "errors.min.html" %}
       <script>
         document.getElementById("modal").style.display = "block";
       </script>
