@@ -40,9 +40,15 @@
       {% get_available_languages as LANGUAGES %}
       {% get_language_info_list for LANGUAGES as languages %}
       {% for language in languages %}
-      <option value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %} selected{% endif %}>
-        {{ language.name_local|capfirst }} ({{ language.code }})
-      </option>
+        {% if language.code == LANGUAGE_CODE %}
+          <option value="{{ language.code }}" selected>
+            {{ language.name_local|capfirst }} ({{ language.code }})
+          </option>
+        {% else %}
+          <option value="{{ language.code }}">
+            {{ language.name_local|capfirst }} ({{ language.code }})
+          </option>
+        {% endif %}
       {% endfor %}
     </select>
     <noscript>
