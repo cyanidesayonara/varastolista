@@ -1,7 +1,8 @@
+backports.csv==1.0.7
 defusedxml==0.5.0
 diff-match-patch==20181111
 dj-database-url==0.5.0
-Django==2.1.5
+Django==2.1.7
 django-dotenv==1.4.2
 django-heroku==0.3.1
 django-import-export==1.2.0
@@ -9,12 +10,12 @@ et-xmlfile==1.0.1
 gunicorn==19.9.0
 jdcal==1.4
 odfpy==1.4.0
-openpyxl==2.5.12
-psycopg2==2.7.6.1
-psycopg2-binary==2.7.6.1
+openpyxl==2.6.1
+psycopg2==2.7.7
+psycopg2-binary==2.7.7
 pytz==2018.9
-PyYAML==3.13
-tablib==0.12.1
+PyYAML==5.1
+tablib==0.13.0
 unicodecsv==0.14.1
 whitenoise==4.1.2
 xlrd==1.2.0
