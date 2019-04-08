@@ -4,3 +4,4 @@ staticfiles
 getting-started/*
 *.sqlite3
 .env
+.vscode/

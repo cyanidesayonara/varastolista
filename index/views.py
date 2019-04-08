@@ -176,7 +176,7 @@ def minus(request):
                     part.minus()
                     message = _("Subtracted (-1)")
                     # if total was previously more than alarm and is now less
-                    if part.alarm:
+                    if part.alarm is not None:
                         if old_total > part.alarm:
                             if part.total <= part.alarm:
                                 send_alarm_mail(request.user, part)
@@ -215,7 +215,7 @@ def edit(request):
                     form.save()
                     message = _("Saved")
                     # if total was previously more than alarm and is now less
-                    if part.alarm:
+                    if part.alarm is not None:
                         if old_total > part.alarm:
                             if part.total <= part.alarm:
                                 send_alarm_mail(request.user, part)
