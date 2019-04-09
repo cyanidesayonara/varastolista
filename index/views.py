@@ -15,8 +15,8 @@ from .forms import PartForm
 
 def send_alarm_mail(user, part):
     stvl_emailees = os.environ.get("STVL_EMAILEES", "").split(" ")
-    print("Sending email to ", stvl_emailees)
-    title = _("Part number ") + part.partno + _(" is running out")
+
+    title = _("Part number ") + part.partno + " - \"" + part.description + "\" " _(" is running out")
 
     body = _("Inventory total of part number ") + part.partno + \
         _(" has reached its alarm limit of ") + str(part.alarm) + "."
@@ -43,6 +43,7 @@ def send_alarm_mail(user, part):
         body = body + _("Extra Info: ") + part.extra_info + "\n"
     body = body + "\nhttps://stvl.herokuapp.com/search/?q=" + part.partno
 
+    print("Sending email to ", stvl_emailees)
     email = EmailMessage(title, body, to=stvl_emailees)
     email.send()
     print("Email sent!", title, body)
