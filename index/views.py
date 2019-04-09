@@ -17,7 +17,7 @@ def send_alarm_mail(user, part):
     stvl_emailees = os.environ.get("STVL_EMAILEES", "").split(" ")
 
     title = _("Part number ") + part.partno + " - \"" + \
-        part.description + "\" " + _(" is running out")
+        part.description + "\"" + _(" is running out")
 
     body = _("Inventory total of part number ") + part.partno + \
         _(" has reached its alarm limit of ") + str(part.alarm) + "."
