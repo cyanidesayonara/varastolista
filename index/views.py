@@ -12,11 +12,12 @@ from .resources import PartResource
 from .models import Part
 from .forms import PartForm
 
+
 def send_alarm_mail(user, part):
     stvl_emailees = os.environ.get("STVL_EMAILEES", "").split(" ")
-
+    print("Sending email to ", stvl_emailees)
     title = _("Part number ") + part.partno + _(" is running out")
-    
+
     body = _("Inventory total of part number ") + part.partno + \
         _(" has reached its alarm limit of ") + str(part.alarm) + "."
     body = body + "\n\n"
@@ -44,6 +45,8 @@ def send_alarm_mail(user, part):
 
     email = EmailMessage(title, body, to=stvl_emailees)
     email.send()
+    print("Email sent!", title, body)
+
 
 def index(request):
     if request.method == "GET":
@@ -56,6 +59,7 @@ def index(request):
             })
         return render(request, template, context)
 
+
 def language(request):
     languages = ["en", "fi"]
     if request.method == "POST":
@@ -64,7 +68,8 @@ def language(request):
             translation.activate(language)
             request.session[translation.LANGUAGE_SESSION_KEY] = language
     return redirect("/")
-    
+
+
 def login_view(request):
     if request.method == "POST":
         template = "index.min.html"
@@ -82,10 +87,12 @@ def login_view(request):
             login(request, user)
     return redirect("/")
 
+
 def logout_view(request):
     if request.method == "POST":
         logout(request)
     return redirect("/")
+
 
 @login_required
 def search(request):
@@ -105,6 +112,7 @@ def search(request):
         return render(request, template, context)
     else:
         raise Http404
+
 
 @login_required
 def new(request):
@@ -129,6 +137,7 @@ def new(request):
         return render(request, template, context)
     else:
         raise Http404
+
 
 @login_required
 def plus(request):
@@ -161,6 +170,7 @@ def plus(request):
         return render(request, template, context)
     else:
         raise Http404
+
 
 @login_required
 def minus(request):
@@ -199,6 +209,7 @@ def minus(request):
         return render(request, template, context)
     else:
         raise Http404
+
 
 @login_required
 def edit(request):
@@ -245,6 +256,7 @@ def edit(request):
     else:
         raise Http404
 
+
 @login_required
 def delete(request):
     if request.method == "POST":
@@ -275,6 +287,7 @@ def delete(request):
         return render(request, template, context)
     else:
         raise Http404
+
 
 @login_required
 def upload(request):
@@ -311,6 +324,7 @@ def upload(request):
         return render(request, template, context)
     else:
         return redirect("/")
+
 
 @login_required
 def download(request):
