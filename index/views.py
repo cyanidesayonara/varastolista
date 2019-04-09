@@ -46,8 +46,12 @@ def send_alarm_mail(user, part):
 
     print("Sending email to ", stvl_emailees)
     email = EmailMessage(title, body, to=stvl_emailees)
-    print(email)
-    email.send()
+    for thingy in email:
+        print(thingy)
+    try:
+        email.send()
+    except Exception as e:
+        print(e)
     print("Email sent!", title, body)
 
 
