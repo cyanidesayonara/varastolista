@@ -60,7 +60,11 @@ def index(request):
         user = request.user
         if user.is_authenticated:
             context.update({
-                "parts": Part.objects.all(),
+                "parts": Part.objects.get_query_set(user),
+            })
+        if user.is_superuser:
+            context.update({
+                "users": User.objects.all(),
             })
         return render(request, template, context)
 
@@ -105,6 +109,7 @@ def search(request):
         template = "index.min.html"
         context = {}
         q = request.GET.get("q")
+        user = request.user
         if (q):
             context.update({
                 "q": q,
@@ -112,7 +117,11 @@ def search(request):
             })
         else:
             context.update({
-                "parts": Part.objects.all(),
+                "parts": Part.objects.get_query_set(user),
+            })
+        if user.is_superuser:
+            context.update({
+                "users": User.objects.all(),
             })
         return render(request, template, context)
     else:
@@ -125,6 +134,7 @@ def new(request):
         template = "index.min.html"
         context = {}
         form = PartForm(request.POST)
+        user = request.user
         if form.is_valid():
             part, created = Part.objects.get_or_create(**form.cleaned_data)
             message = _("Part added")
@@ -137,8 +147,12 @@ def new(request):
                 "errors": form.errors.items(),
             })
         context.update({
-            "parts": Part.objects.all(),
+            "parts": Part.objects.get_query_set(user),
         })
+        if user.is_superuser:
+            context.update({
+                "users": User.objects.all(),
+            })
         return render(request, template, context)
     else:
         raise Http404
@@ -150,6 +164,7 @@ def plus(request):
         template = "index.min.html"
         context = {}
         partno = request.POST.get("partno")
+        user = request.user
         if partno:
             try:
                 part = Part.objects.get(partno=partno)
@@ -170,7 +185,11 @@ def plus(request):
             })
         else:
             context.update({
-                "parts": Part.objects.all(),
+                "parts": Part.objects.get_query_set(user),
+            })
+        if user.is_superuser:
+            context.update({
+                "users": User.objects.all(),
             })
         return render(request, template, context)
     else:
@@ -183,6 +202,7 @@ def minus(request):
         template = "index.min.html"
         context = {}
         partno = request.POST.get("partno")
+        user = request.user
         if partno:
             try:
                 part = Part.objects.get(partno=partno)
@@ -194,7 +214,7 @@ def minus(request):
                     if part.alarm is not None:
                         if old_total > part.alarm:
                             if part.total <= part.alarm:
-                                send_alarm_mail(request.user, part)
+                                send_alarm_mail(user, part)
                     context.update({
                         "message": message,
                         "mod_part": part,
@@ -209,7 +229,11 @@ def minus(request):
             })
         else:
             context.update({
-                "parts": Part.objects.all(),
+                "parts": Part.objects.get_query_set(user),
+            })
+        if user.is_superuser:
+            context.update({
+                "users": User.objects.all(),
             })
         return render(request, template, context)
     else:
@@ -222,6 +246,7 @@ def edit(request):
         template = "index.min.html"
         context = {}
         partno = request.POST.get("orig_partno")
+        user = request.user
         if partno:
             try:
                 part = Part.objects.get(partno=partno)
@@ -234,7 +259,7 @@ def edit(request):
                     if part.alarm is not None:
                         if old_total > part.alarm:
                             if part.total <= part.alarm:
-                                send_alarm_mail(request.user, part)
+                                send_alarm_mail(user, part)
                     context.update({
                         "message": message,
                     })
@@ -255,7 +280,11 @@ def edit(request):
             })
         else:
             context.update({
-                "parts": Part.objects.all(),
+                "parts": Part.objects.get_query_set(user),
+            })
+        if user.is_superuser:
+            context.update({
+                "users": User.objects.all(),
             })
         return render(request, template, context)
     else:
@@ -268,6 +297,7 @@ def delete(request):
         template = "index.min.html"
         context = {}
         partno = request.POST.get("partno")
+        user = request.user
         if partno:
             try:
                 part = Part.objects.get(partno=partno)
@@ -287,7 +317,11 @@ def delete(request):
             })
         else:
             context.update({
-                "parts": Part.objects.all(),
+                "parts": Part.objects.get_query_set(user),
+            })
+        if user.is_superuser:
+            context.update({
+                "users": User.objects.all(),
             })
         return render(request, template, context)
     else:
@@ -324,7 +358,11 @@ def upload(request):
         if user.is_authenticated:
             context.update({
                 "message": message,
-                "parts": Part.objects.all(),
+                "parts": Part.objects.get_query_set(user),
+            })
+        if user.is_superuser:
+            context.update({
+                "users": User.objects.all(),
             })
         return render(request, template, context)
     else:
