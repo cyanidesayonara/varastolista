@@ -2,10 +2,18 @@ from django.db import models
 from django.utils import timezone
 from django.db.models import Q
 from django.db import transaction
+from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator
 
-# Create your models here.
+class PartManager(models.Manager):
+    def get_query_set(self, user):
+        qs = super(PartManager, self).get_queryset()
+        if user.is_superuser:
+            return qs
+        return qs.filter(owner=user)
+
 class Part(models.Model):
+    owner = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
     partno = models.CharField(max_length=100, unique=True)
@@ -22,6 +30,8 @@ class Part(models.Model):
         max_length=100, blank=True, null=True)
     secondary_order_address = models.EmailField(
         max_length=100, blank=True, null=True)
+
+    objects = PartManager()
 
     class Meta:
         ordering = ("-created_at",)

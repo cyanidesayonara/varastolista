@@ -6,11 +6,11 @@ from .models import Part
 
 @admin.register(Part)
 class PartAdmin(ImportExportModelAdmin):
-    list_display = ('partno', 'total', 'created_at', 'updated_at', 'description',
+    list_display = ('partno', 'total', 'created_at', 'owner', 'updated_at', 'description',
                     'location', 'shelf', 'group', 'price', 'extra_info', 'primary_order_address', 'secondary_order_address')
-    fields = ('partno', 'total')
-
-
+    fields = ('partno', 'total', 'description', 'owner',
+                    'location', 'shelf', 'group', 'price', 'extra_info', 'primary_order_address', 'secondary_order_address')
+            
 class PartResource(resources.ModelResource):
     class Meta:
         model = Part
