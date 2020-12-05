@@ -113,7 +113,7 @@ def search(request):
         if (q):
             context.update({
                 "q": q,
-                "parts": Part.search(q),
+                "parts": Part.search(user, q),
             })
         else:
             context.update({
@@ -337,7 +337,7 @@ def upload(request):
             parts = request.FILES["parts"]
 
             try:
-                imported_data = dataset.load(parts.read())
+                dataset.load(parts.read())
                 result = part_resource.import_data(
                     dataset, dry_run=True)  # Test the data import
 

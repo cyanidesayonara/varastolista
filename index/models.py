@@ -48,8 +48,8 @@ class Part(models.Model):
         self.total = self.total - 1
         self.save()
 
-    def search(q):
-        return Part.objects.filter(Q(partno__icontains=q) |
+    def search(user, q):
+        return Part.objects.get_query_set(user).filter(Q(partno__icontains=q) |
                                     Q(shelf__icontains=q) |
                                     Q(group__icontains=q) |
                                     Q(description__icontains=q))
