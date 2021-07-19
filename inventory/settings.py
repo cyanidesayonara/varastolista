@@ -1,5 +1,5 @@
 import os
-import django_heroku
+import django_on_heroku
 import dj_database_url
 from django.utils.translation import ugettext_lazy as _
 
@@ -156,4 +156,4 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
-django_heroku.settings(locals())
+django_on_heroku.settings(locals())
