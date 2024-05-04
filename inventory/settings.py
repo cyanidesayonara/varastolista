@@ -38,8 +38,16 @@ SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "qwerty")
 # SECURITY WARNING: don"t run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG", "True") == "True"
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['localhost']
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:8000'
+]
+ALLOWED_HOSTS = [
+    'localhost',
+]
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:8000',
+]
 
 # Application definition
 
