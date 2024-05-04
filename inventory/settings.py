@@ -1,7 +1,7 @@
 import os
 import django_on_heroku
 import dj_database_url
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 """
 Django settings for inventory project.
