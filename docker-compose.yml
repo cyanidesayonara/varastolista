@@ -1,14 +1,4 @@
 services:
-  nginx:
-    build: ./nginx
-    env_file:
-      - ./.env
-    ports:
-      - "${NGINX_PORT}:80"
-    depends_on:
-      - web
-    networks:
-      - main
   web:
     build: .
     image: python:3-alpine
@@ -19,12 +9,10 @@ services:
              gunicorn inventory.wsgi -b 0.0.0.0:8000"
     env_file:
       - .env
-    expose:
-      - 8000
+    ports:
+      - "8000:8000"
     depends_on:
       - postgres
-    volumes:
-      - static:/app/static
     networks:
       - main
     restart: on-failure
@@ -46,4 +34,3 @@ networks:
 
 volumes:
   pgdata:
-  static:
