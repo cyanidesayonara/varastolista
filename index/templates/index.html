@@ -1,4 +1,4 @@
-{% extends request.is_ajax|yesno:"ajax.min.html,base.min.html" %}
+{% extends is_ajax|yesno:"ajax.min.html,base.min.html" %}
 
 {% block main %}
   {% include "topbar.html" %}
