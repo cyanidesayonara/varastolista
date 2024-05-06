@@ -11,9 +11,12 @@ import tablib
 from .resources import PartResource
 from .models import Part
 from .forms import PartForm
+import logging
+
+logger = logging.getLogger(__name__)
 
 
-def send_alarm_mail(user, part):
+def send_alarm_mail(part):
     stvl_emailees = os.environ.get("STVL_EMAILEES", "").split(" ")
 
     title = _("Part number ") + part.partno + " - \"" + \
@@ -44,19 +47,21 @@ def send_alarm_mail(user, part):
         body = body + _("Extra Info: ") + part.extra_info + "\n"
     body = body + "\nhttps://stvl.herokuapp.com/search/?q=" + part.partno
 
-    print("Sending email to ", stvl_emailees)
+    logging.info("Sending email to stvl_emailees")
     email = EmailMessage(title, body, to=stvl_emailees)
     try:
         email.send()
-        print("Email sent!", title, body)
+        logging.info("Email sent!")
     except Exception as e:
-        print(e)
+        logging.error(e)
 
 
 def index(request):
     if request.method == "GET":
         template = "index.min.html"
-        context = {}
+        context = {
+            "is_ajax": request.headers.get('x-requested-with') == 'XMLHttpRequest'
+        }
         user = request.user
         if user.is_authenticated:
             context.update({
@@ -82,7 +87,9 @@ def language(request):
 def login_view(request):
     if request.method == "POST":
         template = "index.min.html"
-        context = {}
+        context = {
+            "is_ajax": request.headers.get('x-requested-with') == 'XMLHttpRequest'
+        }
         username = request.POST.get("username")
         password = request.POST.get("password")
         user = authenticate(username=username, password=password)
@@ -107,7 +114,9 @@ def logout_view(request):
 def search(request):
     if request.method == "GET":
         template = "index.min.html"
-        context = {}
+        context = {
+            "is_ajax": request.headers.get('x-requested-with') == 'XMLHttpRequest'
+        }
         q = request.GET.get("q")
         user = request.user
         if (q):
@@ -132,11 +141,13 @@ def search(request):
 def new(request):
     if request.method == "POST":
         template = "index.min.html"
-        context = {}
+        context = {
+            "is_ajax": request.headers.get('x-requested-with') == 'XMLHttpRequest'
+        }
         form = PartForm(request.POST)
         user = request.user
         if form.is_valid():
-            part, created = Part.objects.get_or_create(**form.cleaned_data)
+            part, _ = Part.objects.get_or_create(**form.cleaned_data)
             message = _("Part added")
             context.update({
                 "mod_part": part,
@@ -162,7 +173,9 @@ def new(request):
 def plus(request):
     if request.method == "POST":
         template = "index.min.html"
-        context = {}
+        context = {
+            "is_ajax": request.headers.get('x-requested-with') == 'XMLHttpRequest'
+        }
         partno = request.POST.get("partno")
         user = request.user
         if partno:
@@ -200,7 +213,9 @@ def plus(request):
 def minus(request):
     if request.method == "POST":
         template = "index.min.html"
-        context = {}
+        context = {
+            "is_ajax": request.headers.get('x-requested-with') == 'XMLHttpRequest'
+        }
         partno = request.POST.get("partno")
         user = request.user
         if partno:
@@ -244,7 +259,9 @@ def minus(request):
 def edit(request):
     if request.method == "POST":
         template = "index.min.html"
-        context = {}
+        context = {
+            "is_ajax": request.headers.get('x-requested-with') == 'XMLHttpRequest'
+        }
         partno = request.POST.get("orig_partno")
         user = request.user
         if partno:
@@ -295,7 +312,9 @@ def edit(request):
 def delete(request):
     if request.method == "POST":
         template = "index.min.html"
-        context = {}
+        context = {
+            "is_ajax": request.headers.get('x-requested-with') == 'XMLHttpRequest'
+        }
         partno = request.POST.get("partno")
         user = request.user
         if partno:
@@ -353,7 +372,9 @@ def upload(request):
             message = _("No file found")
 
         template = "index.min.html"
-        context = {}
+        context = {
+            "is_ajax": request.headers.get('x-requested-with') == 'XMLHttpRequest'
+        }
         user = request.user
         if user.is_authenticated:
             context.update({
