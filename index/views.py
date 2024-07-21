@@ -191,7 +191,7 @@ def plus(request):
         if (q):
             context.update({
                 "q": q,
-                "parts": Part.search(q),
+                "parts": Part.search(user, q),
             })
         else:
             context.update({
@@ -236,7 +236,7 @@ def minus(request):
         if (q):
             context.update({
                 "q": q,
-                "parts": Part.search(q),
+                "parts": Part.search(user, q),
             })
         else:
             context.update({
@@ -288,7 +288,7 @@ def edit(request):
         if (q):
             context.update({
                 "q": q,
-                "parts": Part.search(q),
+                "parts": Part.search(user, q),
             })
         else:
             context.update({
@@ -326,7 +326,7 @@ def delete(request):
         if (q):
             context.update({
                 "q": q,
-                "parts": Part.search(q),
+                "parts": Part.search(user, q),
             })
         else:
             context.update({
