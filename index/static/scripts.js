@@ -1,11 +1,11 @@
 function openModal() {
   document.getElementById("modal").style.display = "block";
-};
+}
 function closeModal() {
   let modal = document.getElementById("modal");
   modal.innerHTML = "";
   modal.style.display = "";
-};
+}
 function pushState(url) {
   // return if url in urls
   const urls = ["new", "plus", "minus", "edit", "delete", "upload", "language"];
@@ -13,7 +13,7 @@ function pushState(url) {
     if (url.includes(urls[i])) {
       return;
     }
-  }  
+  }
   const context = document.getElementById("main").innerHTML;
   const state = {
     "context": context,
@@ -24,7 +24,7 @@ function pushState(url) {
   } catch (e) {
     console.log("State is too big to save", context.length, e);
   }
-};
+}
 function replaceState(url) {
   // return if url in urls
   const urls = ["new", "plus", "minus", "edit", "delete", "upload", "language"];
@@ -32,7 +32,7 @@ function replaceState(url) {
     if (url.includes(urls[i])) {
       return;
     }
-  }  
+  }
   const context = document.getElementById("main").innerHTML;
   const state = {
     "context": context,
@@ -40,17 +40,18 @@ function replaceState(url) {
   };
   try {
     history.replaceState(state, "", url);
-  } catch (e) {    
+  } catch (e) {
     console.log("State is too big to save", context.length, e);
   }
-};
+}
 // replaces spaces/&s with +, removes unwanted chars
 function cleanString(q) {
+  q = q.trim()
   q = q.replace(/&+/g, "+");
   q = q.replace(/\s+/g, "+");
   q = q.replace(/([^a-zA-Z0-9\u0080-\uFFFF +']+)/gi, "");
   return q.toLowerCase();
-};
+}
 function initScanner() {
   let el = document.createElement("video");
   el.id = "scanner";
@@ -69,7 +70,7 @@ function initScanner() {
       if (cameras[1]) {
         scanner.start(cameras[1]);
       } else {
-        scanner.start(cameras[0]); 
+        scanner.start(cameras[0]);
       }
       $("#modal").click(function () {
         scanner.stop();
@@ -83,7 +84,7 @@ function initScanner() {
     console.error(e);
     closeModal();
   });
-};
+}
 
 $(document)
   .ready(function() {
@@ -115,7 +116,7 @@ $(document)
         if (document.getElementById("errors")) {
           openModal();
         }
-      });    
+      });
   })
   .on("click", ".excel-button", function (e) {
     e.preventDefault();
