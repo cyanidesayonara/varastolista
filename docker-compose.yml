@@ -1,7 +1,8 @@
 services:
   web:
-    build: .
-    image: python:3-alpine
+    build:
+      context: .
+      dockerfile: Dockerfile
     command: >
       sh -c "python manage.py collectstatic --noinput &&
              sleep 5 &&
